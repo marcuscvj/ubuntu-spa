@@ -62,6 +62,10 @@
   font-style: normal;
 }
 
+html {
+  overflow-y: hidden;
+}
+
 body {
   font-family: ubunturegular;
   background: url('../image/ubuntu-wallpaper.png') top center no-repeat;
@@ -128,5 +132,18 @@ body {
   background: linear-gradient(#616155 , #483C3C);
   height: 30px;
   padding: 0 0;
-  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  border-bottom: 1px solid rgba(0, 0, 0, .3);
+  -moz-box-shadow:    0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+  box-shadow:         0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:active {
+  color: rgba(255, 255, 255, 0.9);
 }
