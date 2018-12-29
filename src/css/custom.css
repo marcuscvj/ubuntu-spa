@@ -83,15 +83,15 @@ body {
 
 .app-list {
   padding-left: 10px;
-  padding-right: 68px;
-  width: 80px;
+  padding-right: 55px;
+  width: 60px;
   flex-grow: 0 !important;
 }
 
 .nav-group {
   background: black;
   background: rgba(0, 0, 0, 0.35); 
-  width: 80px;
+  width: 60px;
   min-height: 100vh;
   height: 100%;
   border: 1px solid rgba(255, 255, 255, .1);
@@ -102,8 +102,8 @@ body {
 
 .app-nav-link {
   margin: 6px 6px 0px 6px;
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 1px solid rgba(255, 255, 255, .1);
   border-radius: .25rem;
