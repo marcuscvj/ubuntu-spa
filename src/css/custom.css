@@ -1,0 +1,132 @@
+@font-face {
+  font-family: 'ubuntubold';
+  src: url('../fonts/ubuntu-bold-webfont.woff2') format('woff2'),
+       url('../fonts/ubuntu-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubuntubold_italic';
+  src: url('../fonts/ubuntu-bolditalic-webfont.woff2') format('woff2'),
+       url('../fonts/ubuntu-bolditalic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubuntuitalic';
+  src: url('../fonts/ubuntu-italic-webfont.woff2') format('woff2'),
+       url('../fonts/ubuntu-italic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubuntu_lightregular';
+  src: url('../fonts/ubuntu-light-webfont.woff2') format('woff2'),
+       url('../fonts/ubuntu-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubuntu_lightitalic';
+  src: url('../fonts/ubuntu-lightitalic-webfont.woff2') format('woff2'),
+       url('../fonts/ubuntu-lightitalic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubuntu_mediumregular';
+  src: url('../fonts/ubuntu-medium-webfont.woff2') format('woff2'),
+       url('../fonts/ubuntu-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubuntu_mediumitalic';
+  src: url('../fonts/ubuntu-mediumitalic-webfont.woff2') format('woff2'),
+       url('../fonts/ubuntu-mediumitalic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ubunturegular';
+  src: url('../fonts/ubuntu-regular-webfont.woff2') format('woff2'),
+       url('../fonts/ubuntu-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: ubunturegular;
+  background: url('../image/ubuntu-wallpaper.png') top center no-repeat;
+}
+
+.container {
+  padding-left: 5px;
+}
+
+.full-width {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.app-list {
+  padding-left: 10px;
+  padding-right: 68px;
+  width: 80px;
+  flex-grow: 0 !important;
+}
+
+.nav-group {
+  background: black;
+  background: rgba(0, 0, 0, 0.35); 
+  width: 80px;
+  min-height: 100vh;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, .1);
+  -moz-box-shadow:    inset 0 0 70px #4c1431;
+  -webkit-box-shadow: inset 0 0 70px #4c1431;
+  box-shadow:         inset 0 0 70px #4c1431;
+}
+
+.app-nav-link {
+  margin: 6px 6px 0px 6px;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: .25rem;
+}
+
+.app-nav-link:last-child {
+  margin: 6px 6px 6px 6px;
+}
+
+.app-nav-link img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.app-nav-link img:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: .25rem;
+  -webkit-transition: all 1500ms ease;
+  -moz-transition: all 1500ms ease;
+  -ms-transition: all 1500ms ease;
+  -o-transition: all 1500ms ease;
+  transition: all 1500ms ease;
+}
+
+.navbar {
+  background: linear-gradient(#616155 , #483C3C);
+  height: 30px;
+  padding: 0 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}

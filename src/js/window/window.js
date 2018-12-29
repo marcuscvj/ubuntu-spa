@@ -1,7 +1,3 @@
-const template = document.createElement('template')
-
-template.innerHTML = ``
-
 export class Window extends window.HTMLElement {
   constructor () {
     super()
