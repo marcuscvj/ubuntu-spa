@@ -69,6 +69,7 @@ html {
 body {
   font-family: ubunturegular;
   background: url('../image/ubuntu-wallpaper.png') top center no-repeat;
+  color: #7A6D81;
 }
 
 .container {
@@ -105,7 +106,6 @@ body {
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, .1);
   border-radius: .25rem;
 }
 
@@ -140,10 +140,10 @@ body {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.9);
+  color: #DAD8D1;
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link:active {
-  color: rgba(255, 255, 255, 0.9);
+  color: #DAD8D1;
 }
