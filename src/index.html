@@ -28,24 +28,21 @@
   <div class="container full-width">
     <div class="row">
       <div class="col-sm app-list">
-        <div class="nav-group nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="app-nav-link" href="#" role="tab">
-            <img src="image/nav/chat.png" alt="start"/>
+        <div id="apps" class="nav-group nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="app-nav-link" href="#!/chat">
+            <img src="image/nav/chat.png" alt="chat"/>
           </a>
           <a class="app-nav-link" href="#" role="tab">
-            <img src="image/nav/stopwatch.png" alt="start"/>
+            <img src="image/nav/stopwatch.png" alt="stopwatch"/>
           </a>
           <a class="app-nav-link" href="#" role="tab">
-            <img src="image/nav/memory-game.png" alt="start"/>
+            <img src="image/nav/memory-game.png" alt="memory-game"/>
           </a>
         </div>
       </div>
 
-      <div id="test" class="col-sm">
-        Depending on which button on the deck I choose to click on. A new window will open with the corresponding template tag.
-
-        <window-form></window-form>
-      </div>
+      <div id="app-surface" class="col-sm"></div>
+      
     </div>
   </div>
 

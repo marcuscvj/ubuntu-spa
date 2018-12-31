@@ -71,7 +71,6 @@ t.innerHTML = `
         <p>Modal body text goes here.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-light">Save changes</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -85,13 +84,16 @@ export class Window extends window.HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(t.content.cloneNode(true))
     this.modalCloseBtn = this.shadowRoot.querySelector('#modal-close')
+    this.modalFooterCloseBtn = this.shadowRoot.querySelector('.modal-footer:first-child')
   }
 
   connectedCallback () {
     this.modalCloseBtn.addEventListener('click', event => {
-      console.log('Clicked!')
       this.setAttribute('hidden', '')
     })
+    /* this.modalFooterCloseBtn.addEventListener('click', event => {
+      this.setAttribute('hidden', '')
+    }) */
   }
 }
 
