@@ -69,7 +69,7 @@ t.innerHTML = `
       </div>
       <div id="body" class="modal-body"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        <button id="modal-footer-close-btn" type="button" class="btn btn-light" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -85,6 +85,7 @@ export class Window extends window.HTMLElement {
     this._modalTitle = this.shadowRoot.querySelector('#title')
     this.modalBody = this.shadowRoot.querySelector('#body') // should be accessible in inherted classes
     this._modalCloseBtn = this.shadowRoot.querySelector('#modal-close')
+    this._modalFooterCloseBtn = this.shadowRoot.querySelector('#modal-footer-close-btn')
   }
 
   static get observedAttributes () {
@@ -95,6 +96,10 @@ export class Window extends window.HTMLElement {
     this._modalTitle.textContent = this._title
 
     this._modalCloseBtn.addEventListener('click', event => {
+      this.setAttribute('hidden', '')
+    })
+
+    this._modalFooterCloseBtn.addEventListener('click', event => {
       this.setAttribute('hidden', '')
     })
   }
