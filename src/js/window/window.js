@@ -67,9 +67,7 @@ t.innerHTML = `
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
+      <div id="body" class="modal-body"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
       </div>
@@ -84,8 +82,9 @@ export class Window extends window.HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(t.content.cloneNode(true))
     this._title = 'Window Object'
-    this.modalCloseBtn = this.shadowRoot.querySelector('#modal-close')
-    // this.modalFooterCloseBtn = this.shadowRoot.querySelector('.modal-footer:first-child')
+    this._modalTitle = this.shadowRoot.querySelector('#title')
+    this.modalBody = this.shadowRoot.querySelector('#body') // should be accessible in inherted classes
+    this._modalCloseBtn = this.shadowRoot.querySelector('#modal-close')
   }
 
   static get observedAttributes () {
@@ -93,12 +92,11 @@ export class Window extends window.HTMLElement {
   }
 
   connectedCallback () {
-    this.modalCloseBtn.addEventListener('click', event => {
+    this._modalTitle.textContent = this._title
+
+    this._modalCloseBtn.addEventListener('click', event => {
       this.setAttribute('hidden', '')
     })
-    /* this.modalFooterCloseBtn.addEventListener('click', event => {
-      this.setAttribute('hidden', '')
-    }) */
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
