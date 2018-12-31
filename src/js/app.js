@@ -5,9 +5,6 @@ let apps = document.querySelector('#apps')
 
 apps.addEventListener('click', event => {
   if (event.target.alt === 'chat') {
-    /* let chat = document.createElement('window-form')
-    chat.setAttribute('title', 'Chat X')
-    document.querySelector('#app-surface').appendChild(chat) */
     let chat = document.createElement('chat-form')
     chat.setAttribute('title', 'Chat X')
     document.querySelector('#app-surface').appendChild(chat)

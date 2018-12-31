@@ -11,6 +11,9 @@ t.innerHTML = `
   .modal-content {
     background-color: #F2F1F0;
     border-radius: .25rem;
+    -webkit-box-shadow:  10px 10px 50px 1px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow:     10px 10px 50px 1px rgba(0, 0, 0, 0.7);
+    box-shadow:          10px 10px 50px 1px rgba(0, 0, 0, 0.7);
   }
 
   .modal-header {
@@ -53,6 +56,21 @@ t.innerHTML = `
     border-color: #cacaca; 
   }
 
+  .btn-primary {
+    color: #fff;
+    background-color: #8D1440;
+    border-color: #630225;
+  }
+
+  .btn-primary:not(:disabled):not(.disabled).active,
+  .btn-primary:not(:disabled):not(.disabled):active,
+  .show>.btn-primary.dropdown-toggle,
+  .btn-primary:hover {
+    color: #fff;
+    background-color: #540c26;
+    border-color: #630225;
+  }
+
   *:focus {
     outline: 0 !important;
   }
@@ -81,11 +99,11 @@ export class Window extends window.HTMLElement {
     super()
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(t.content.cloneNode(true))
-    this._title = 'Window Object'
-    this._modalTitle = this.shadowRoot.querySelector('#title')
+    this.titleText = 'Window Object'
+    this.modalTitle = this.shadowRoot.querySelector('#title')
     this.modalBody = this.shadowRoot.querySelector('#body') // should be accessible in inherted classes
-    this._modalCloseBtn = this.shadowRoot.querySelector('#modal-close')
-    this._modalFooterCloseBtn = this.shadowRoot.querySelector('#modal-footer-close-btn')
+    this.modalCloseBtn = this.shadowRoot.querySelector('#modal-close')
+    this.modalFooterCloseBtn = this.shadowRoot.querySelector('#modal-footer-close-btn')
   }
 
   static get observedAttributes () {
@@ -93,20 +111,20 @@ export class Window extends window.HTMLElement {
   }
 
   connectedCallback () {
-    this._modalTitle.textContent = this._title
+    this.modalTitle.textContent = this.titleText
 
-    this._modalCloseBtn.addEventListener('click', event => {
+    this.modalCloseBtn.addEventListener('click', event => {
       this.setAttribute('hidden', '')
     })
 
-    this._modalFooterCloseBtn.addEventListener('click', event => {
+    this.modalFooterCloseBtn.addEventListener('click', event => {
       this.setAttribute('hidden', '')
     })
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
     if (name === 'title') {
-      this._title = newValue
+      this.titleText = newValue
     }
   }
 }
