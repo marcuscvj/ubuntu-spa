@@ -62,7 +62,7 @@ t.innerHTML = `
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div id="modal-header" class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 id="title" class="modal-title">Modal title</h5>
         <button id="modal-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -83,8 +83,13 @@ export class Window extends window.HTMLElement {
     super()
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(t.content.cloneNode(true))
+    this._title = 'Window Object'
     this.modalCloseBtn = this.shadowRoot.querySelector('#modal-close')
-    this.modalFooterCloseBtn = this.shadowRoot.querySelector('.modal-footer:first-child')
+    // this.modalFooterCloseBtn = this.shadowRoot.querySelector('.modal-footer:first-child')
+  }
+
+  static get observedAttributes () {
+    return ['title']
   }
 
   connectedCallback () {
@@ -94,6 +99,12 @@ export class Window extends window.HTMLElement {
     /* this.modalFooterCloseBtn.addEventListener('click', event => {
       this.setAttribute('hidden', '')
     }) */
+  }
+
+  attributeChangedCallback (name, oldValue, newValue) {
+    if (name === 'title') {
+      this._title = newValue
+    }
   }
 }
 

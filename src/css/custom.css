@@ -147,3 +147,9 @@ body {
 .navbar-light .navbar-nav .nav-link:active {
   color: #DAD8D1;
 }
+
+@media (min-width: 576px)
+  .modal-dialog {
+      max-width: 500px;
+      margin: 1.75rem;
+  }
