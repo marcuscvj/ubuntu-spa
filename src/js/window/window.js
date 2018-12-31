@@ -42,6 +42,12 @@ t.innerHTML = `
     border-top: none;
   }
 
+  #modal-icon {
+    width: 24px;
+    height: auto;
+    margin-right: 10px;
+  }
+
   .close {
     color: #DAD8D1;
     text-shadow: none;
@@ -80,6 +86,7 @@ t.innerHTML = `
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div id="modal-header" class="modal-header">
+        <img id="modal-icon">
         <h5 id="title" class="modal-title">Modal title</h5>
         <button id="modal-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -101,9 +108,10 @@ export class Window extends window.HTMLElement {
     this.shadowRoot.appendChild(t.content.cloneNode(true))
     this.titleText = 'Window Object'
     this.modalTitle = this.shadowRoot.querySelector('#title')
-    this.modalBody = this.shadowRoot.querySelector('#body') // should be accessible in inherted classes
+    this.modalBody = this.shadowRoot.querySelector('#body')
     this.modalCloseBtn = this.shadowRoot.querySelector('#modal-close')
     this.modalFooterCloseBtn = this.shadowRoot.querySelector('#modal-footer-close-btn')
+    this.modalIcon = this.shadowRoot.querySelector('#modal-icon')
   }
 
   static get observedAttributes () {

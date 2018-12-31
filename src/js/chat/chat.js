@@ -14,6 +14,8 @@ export class Chat extends Window {
   constructor () {
     super()
     this.username = ''
+    this.modalIcon.setAttribute('src', '/image/nav/chat.png')
+    this.modalIcon.setAttribute('alt', 'Chat')
     this.modalBody.innerHTML = inputForm
   }
 }
