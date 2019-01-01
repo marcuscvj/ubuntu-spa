@@ -33,9 +33,7 @@ export class Chat extends Window {
     this.modalIcon.setAttribute('alt', 'Chat')
     this.username = undefined
     this.url = 'ws://vhost3.lnu.se:20080/socket/'
-    this.messages = {}
-    
-    const connection = new WebSocket(this.url)
+    this.messages = []
 
     // if chat-form does not exists in DOM
     if (!document.querySelector('chat-form')) {
@@ -43,6 +41,17 @@ export class Chat extends Window {
     } else {
       this.modalBody.appendChild(messageForm.content.cloneNode(true))
     }
+    
+    const socket = new WebSocket(this.url)
+
+    // Event Listeners
+    socket.addEventListener('open', event => {
+      socket.send('Hello Server!')
+    })
+  
+    socket.addEventListener('open', event => {
+      console.log('Message from server ', event.data)
+    })
 
     this.modalBody.addEventListener('submit', event => {
       event.preventDefault()
@@ -62,25 +71,10 @@ export class Chat extends Window {
           key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
         }
 
-        this.start(JSON.stringify(sendObj))
+        socket.send(JSON.stringify(sendObj))
+        this.modalBody.querySelector('input').value = ''
       }
     })
-  }
-
-  start (objData) {
-    const connection = new WebSocket(this.url)
-
-    connection.onopen = () => {
-      connection.send(objData)
-    }
-
-    connection.onmessage = e => {
-      this.messages += JSON.parse(e.data)
-    }
-
-    connection.onerror = error => {
-      console.error(`WebSocket error: ${error}`)
-    }
   }
 }
 
