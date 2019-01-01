@@ -16,9 +16,7 @@ const messageForm = document.createElement('template')
 messageForm.innerHTML = `
 <form id="message-form" autocomplete="off">
 <div class="form-group">
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" readonly>
-  <b>Marcus:</b> some sample text.
-  </textarea>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" readonly></textarea>
 </div>
 <div class="form-group">
   <input class="form-control" type="text" name="message" placeholder="Send a message">
@@ -33,7 +31,6 @@ export class Chat extends Window {
     this.modalIcon.setAttribute('alt', 'Chat')
     this.username = undefined
     this.url = 'ws://vhost3.lnu.se:20080/socket/'
-    this.messages = []
 
     // if chat-form does not exists in DOM
     if (!document.querySelector('chat-form')) {
@@ -41,16 +38,13 @@ export class Chat extends Window {
     } else {
       this.modalBody.appendChild(messageForm.content.cloneNode(true))
     }
-    
+
     const socket = new WebSocket(this.url)
 
-    // Event Listeners
-    socket.addEventListener('open', event => {
-      socket.send('Hello Server!')
-    })
-  
-    socket.addEventListener('open', event => {
-      console.log('Message from server ', event.data)
+    socket.addEventListener('message', event => {
+      let msg = JSON.parse(event.data)
+      console.log(msg)
+      this.modalBody.querySelector('textarea').value += 'test'
     })
 
     this.modalBody.addEventListener('submit', event => {
