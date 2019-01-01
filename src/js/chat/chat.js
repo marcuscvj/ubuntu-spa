@@ -14,12 +14,14 @@ inputForm.innerHTML = `
 
 const messageForm = document.createElement('template')
 messageForm.innerHTML = `
-<form>
+<form id="message-form" autocomplete="off">
 <div class="form-group">
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" readonly></textarea>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" readonly>
+  <b>Marcus:</b> some sample text.
+  </textarea>
 </div>
 <div class="form-group">
-  <input id="input1" class="form-control" type="text" placeholder="Send a message">
+  <input class="form-control" type="text" name="message" placeholder="Send a message">
 </div>
 </form>
 `
@@ -30,15 +32,36 @@ export class Chat extends Window {
     this.username = undefined
     this.modalIcon.setAttribute('src', '/image/nav/chat.png')
     this.modalIcon.setAttribute('alt', 'Chat')
-    this.modalBody.appendChild(inputForm.content.cloneNode(true))
+    
     this.url = 'ws://vhost3.lnu.se:20080/socket/'
+
+    // if chat-form does not exists in DOM
+    if (!document.querySelector('chat-form')) {
+      this.modalBody.appendChild(inputForm.content.cloneNode(true))
+    } else {
+      this.modalBody.appendChild(messageForm.content.cloneNode(true))
+    }
 
     this.modalBody.addEventListener('submit', event => {
       event.preventDefault()
-      this.username = event.target.username.value
-      this.clearWindow()
 
-      this.modalBody.appendChild(messageForm.content.cloneNode(true))
+      if (event.target.id === 'username-form') {
+        this.username = event.target.username.value
+        this.clearWindow()
+        this.modalBody.appendChild(messageForm.content.cloneNode(true))
+      } else {
+        let msg = event.target.message.value
+
+        sendObj = {
+          type: 'message',
+          data: msg,
+          username: this.username,
+          channel: 'other',
+          key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
+        }
+
+        console.log(msg)
+      }
     })
   }
 
