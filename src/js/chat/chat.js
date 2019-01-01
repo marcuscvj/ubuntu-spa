@@ -14,6 +14,11 @@ inputForm.innerHTML = `
 
 const messageForm = document.createElement('template')
 messageForm.innerHTML = `
+<style>
+  .form-control {
+    overflow-y: scroll;
+  }
+</style>
 <form id="message-form" autocomplete="off">
 <div class="form-group">
   <textarea class="form-control" rows="8" readonly></textarea>
@@ -29,7 +34,6 @@ export class Chat extends Window {
     super()
     this.modalIcon.setAttribute('src', '/image/nav/chat.png')
     this.modalIcon.setAttribute('alt', 'Chat')
-    this.username = undefined
     this.url = 'ws://vhost3.lnu.se:20080/socket/'
 
     // if chat-form does not exists in DOM
@@ -42,6 +46,12 @@ export class Chat extends Window {
     const socket = new WebSocket(this.url)
 
     socket.addEventListener('message', event => {
+      let lines = this.modalBody.querySelector('textarea').innerHTML.split('\n')
+
+      if (lines.length === 20) {
+        lines.shift()
+      }
+
       let msg = JSON.parse(event.data)
       console.log(msg) // TA BORT SENARE
 
