@@ -16,7 +16,7 @@ const messageForm = document.createElement('template')
 messageForm.innerHTML = `
 <form id="message-form" autocomplete="off">
 <div class="form-group">
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" readonly></textarea>
+  <textarea class="form-control" rows="8" readonly></textarea>
 </div>
 <div class="form-group">
   <input class="form-control" type="text" name="message" placeholder="Send a message">
@@ -43,11 +43,11 @@ export class Chat extends Window {
 
     socket.addEventListener('message', event => {
       let msg = JSON.parse(event.data)
-      console.log(msg)
-      
+      console.log(msg) // TA BORT SENARE
+
       if (msg.type === 'message') {
-        let str = msg.username + ': ' + msg.data + ''
-        this.modalBody.querySelector('textarea').value += str
+        let str = msg.username + ': ' + msg.data + '&#010;'
+        this.modalBody.querySelector('textarea').innerHTML += str
       }
     })
 
@@ -55,16 +55,19 @@ export class Chat extends Window {
       event.preventDefault()
 
       if (event.target.id === 'username-form') {
-        this.username = event.target.username.value
+        let user = event.target.username.value
+        window.localStorage.setItem('user', JSON.stringify({ username: user }))
+
         this.clearWindow()
         this.modalBody.appendChild(messageForm.content.cloneNode(true))
       } else {
         let msg = event.target.message.value
+        let user = JSON.parse(window.localStorage.getItem('user'))
 
         let sendObj = {
           type: 'message',
           data: msg,
-          username: this.username,
+          username: user.username,
           channel: 'other',
           key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
         }
