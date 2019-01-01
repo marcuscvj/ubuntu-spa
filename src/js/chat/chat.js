@@ -44,7 +44,11 @@ export class Chat extends Window {
     socket.addEventListener('message', event => {
       let msg = JSON.parse(event.data)
       console.log(msg)
-      this.modalBody.querySelector('textarea').value += 'test'
+      
+      if (msg.type === 'message') {
+        let str = msg.username + ': ' + msg.data + ''
+        this.modalBody.querySelector('textarea').value += str
+      }
     })
 
     this.modalBody.addEventListener('submit', event => {
