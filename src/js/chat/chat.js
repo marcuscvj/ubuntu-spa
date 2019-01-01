@@ -29,11 +29,13 @@ messageForm.innerHTML = `
 export class Chat extends Window {
   constructor () {
     super()
-    this.username = undefined
     this.modalIcon.setAttribute('src', '/image/nav/chat.png')
     this.modalIcon.setAttribute('alt', 'Chat')
-    
+    this.username = undefined
     this.url = 'ws://vhost3.lnu.se:20080/socket/'
+    this.messages = {}
+    
+    const connection = new WebSocket(this.url)
 
     // if chat-form does not exists in DOM
     if (!document.querySelector('chat-form')) {
@@ -52,7 +54,7 @@ export class Chat extends Window {
       } else {
         let msg = event.target.message.value
 
-        sendObj = {
+        let sendObj = {
           type: 'message',
           data: msg,
           username: this.username,
@@ -60,7 +62,7 @@ export class Chat extends Window {
           key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
         }
 
-        console.log(msg)
+        this.start(JSON.stringify(sendObj))
       }
     })
   }
@@ -73,7 +75,7 @@ export class Chat extends Window {
     }
 
     connection.onmessage = e => {
-      console.log(e.data)
+      this.messages += JSON.parse(e.data)
     }
 
     connection.onerror = error => {
