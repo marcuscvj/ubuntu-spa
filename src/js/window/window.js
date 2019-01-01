@@ -135,6 +135,10 @@ export class Window extends window.HTMLElement {
       this.titleText = newValue
     }
   }
+
+  clearWindow () {
+    this.modalBody.innerHTML = ''
+  }
 }
 
 window.customElements.define('window-form', Window)
