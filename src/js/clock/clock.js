@@ -93,6 +93,7 @@ export class Clock extends Window {
           this.stopWatchTab.classList.remove('active')
         }
       } else if (event.target.id === 'stopwatch-start-btn') {
+        this.runStopwatch = true
         this.stopwatch()
       } else if (event.target.id === 'stopwatch-reset-btn') {
         this.runStopwatch = false
@@ -123,6 +124,7 @@ export class Clock extends Window {
     let counter = setInterval(() => {
       if (!this.runStopwatch) {
         clearInterval(counter)
+        this.stopWatchTab.firstElementChild.innerHTML = '00:00:00'
       } else {
         this.stopWatchTab.firstElementChild.innerHTML = this.displayTime(seconds)
         seconds++
