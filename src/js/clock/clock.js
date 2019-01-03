@@ -15,6 +15,10 @@ clockDiv.innerHTML = `
   .nav {
     margin-bottom: 1em;
   }
+
+  #time {
+    font-size: 5rem;
+  }
 </style>
 <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
   <li class="nav-item">
@@ -29,7 +33,10 @@ clockDiv.innerHTML = `
   <div class="tab-pane fade show active" id="stopwatch" role="tabpanel" aria-labelledby="stopwatch-tab">
     <button class="btn btn-primary" type="submit">Start</button>
   </div>
-  <div class="tab-pane fade" id="timer" role="tabpanel" aria-labelledby="timer-tab">Timer</div>
+  <div class="tab-pane fade" id="timer" role="tabpanel" aria-labelledby="timer-tab">
+    <p id="time"></p>
+    <button id="timer-btn" class="btn btn-primary" type="submit">Start</button>
+  </div>
 </div>
 `
 
@@ -39,6 +46,8 @@ export class Clock extends Window {
     this.modalIcon.setAttribute('src', '/image/nav/clock.png')
     this.modalIcon.setAttribute('alt', 'Clock')
     this.modalBody.appendChild(clockDiv.content.cloneNode(true))
+
+    this.stop = false
 
     this.stopWatchNavItem = this.modalBody.querySelector('#stopwatch-tab')
     this.timerNavItem = this.modalBody.querySelector('#timer-tab')
@@ -64,8 +73,26 @@ export class Clock extends Window {
           this.stopWatchTab.classList.remove('show')
           this.stopWatchTab.classList.remove('active')
         }
+      } else if (event.target.id === 'timer-btn') {
+        this.timer()
       }
     })
+  }
+
+  timer () {
+    let sec = 10
+
+    let timer = setInterval(() => {
+      if (this.stop) {
+        clearInterval(timer)
+      } else {
+        this.timerTab.firstElementChild.innerHTML = sec
+        sec--
+        if (sec < 0) {
+          clearInterval(timer)
+        }
+      }
+    }, 1000)
   }
 }
 
