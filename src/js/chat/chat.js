@@ -60,7 +60,6 @@ export class Chat extends Window {
 
     socket.addEventListener('message', event => {
       let msg = JSON.parse(event.data)
-      console.log(msg) // TA BORT SENARE
 
       if (msg.type === 'message' && msg.channel === this.channel) {
         let str = msg.username + ': ' + msg.data + '&#010;'
