@@ -1,4 +1,5 @@
 import { Window } from '../window/window.js'
+// import { WebSocket } from 'websocket'
 
 const inputForm = document.createElement('template')
 inputForm.innerHTML = `
@@ -20,12 +21,20 @@ messageForm.innerHTML = `
   }
 </style>
 <form id="message-form" autocomplete="off">
-<div class="form-group">
-  <textarea class="form-control" rows="8" readonly></textarea>
-</div>
-<div class="form-group">
-  <input class="form-control" type="text" name="message" placeholder="Send a message">
-</div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+      <div class="input-group-text">#</div>
+      </div>
+      <input type="text" class="form-control" name="channel" id="inlineFormInputChannel" placeholder="channel">
+    </div>
+  </div>
+  <div class="form-group">
+    <textarea class="form-control" rows="8" readonly></textarea>
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="text" name="message" placeholder="Send a message">
+  </div>
 </form>
 `
 
@@ -34,6 +43,7 @@ export class Chat extends Window {
     super()
     this.modalIcon.setAttribute('src', '/image/nav/chat.png')
     this.modalIcon.setAttribute('alt', 'Chat')
+    this.channel = undefined
     this.url = 'ws://vhost3.lnu.se:20080/socket/'
 
     // if chat-form does not exists in DOM
@@ -46,18 +56,19 @@ export class Chat extends Window {
     const socket = new WebSocket(this.url)
 
     socket.addEventListener('message', event => {
-      let lines = this.modalBody.querySelector('textarea').innerHTML.split('\n')
-
-      if (lines.length === 20) {
-        lines.shift()
-      }
-
       let msg = JSON.parse(event.data)
       console.log(msg) // TA BORT SENARE
 
       if (msg.type === 'message') {
         let str = msg.username + ': ' + msg.data + '&#010;'
         this.modalBody.querySelector('textarea').innerHTML += str
+      }
+    })
+
+    this.modalBody.addEventListener('input', event => {
+      if (event.target.id === 'inlineFormInputChannel') {
+        this.channel = event.target.value
+        console.log(this.channel) // TA BORT SENARE
       }
     })
 
@@ -78,7 +89,7 @@ export class Chat extends Window {
           type: 'message',
           data: msg,
           username: user.username,
-          channel: 'other',
+          channel: this.channel,
           key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
         }
 
