@@ -19,6 +19,10 @@ clockDiv.innerHTML = `
   #time {
     font-size: 5rem;
   }
+
+  .input-group {
+    margin-bottom: 1em;
+  }
 </style>
 <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
   <li class="nav-item">
@@ -35,6 +39,16 @@ clockDiv.innerHTML = `
   </div>
   <div class="tab-pane fade" id="timer" role="tabpanel" aria-labelledby="timer-tab">
     <p id="time"></p>
+    
+    <div id="time-input" class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Time: </span>
+      </div>
+      <input type="text" aria-label="Hours" class="form-control" placeholder="Hours">
+      <input type="text" aria-label="Minutes" class="form-control" placeholder="Minutes">
+      <input type="text" aria-label="Seconds" class="form-control" placeholder="Seconds">
+    </div>
+
     <button id="timer-btn" class="btn btn-primary" type="submit">Start</button>
   </div>
 </div>
@@ -66,6 +80,7 @@ export class Clock extends Window {
         }
       } else if (event.target.id === 'timer-tab') {
         if (!this.timerTab.classList.contains('show active')) {
+
           this.timerNavItem.setAttribute('class', 'nav-link active')
           this.timerTab.setAttribute('class', 'tab-pane fade show active')
 
@@ -74,21 +89,24 @@ export class Clock extends Window {
           this.stopWatchTab.classList.remove('active')
         }
       } else if (event.target.id === 'timer-btn') {
-        this.timer()
+        this.modalBody.querySelector('#time-input').innerHTML = ''
+        this.timer(1, 2, 30)
       }
     })
   }
 
-  timer () {
-    let sec = 10
+  timer (hours, minutes, seconds) {
+    let hoursToSeconds = hours * 60 * 60
+    let minutesToSeconds = minutes * 60
+    let totalSeconds = hoursToSeconds + minutesToSeconds + seconds
 
     let timer = setInterval(() => {
       if (this.stop) {
         clearInterval(timer)
       } else {
-        this.timerTab.firstElementChild.innerHTML = sec
-        sec--
-        if (sec < 0) {
+        this.timerTab.firstElementChild.innerHTML = totalSeconds
+        totalSeconds--
+        if (totalSeconds < 0) {
           clearInterval(timer)
         }
       }
