@@ -2,6 +2,20 @@ import { Window } from '../window/window.js'
 
 const clockDiv = document.createElement('template')
 clockDiv.innerHTML = `
+<style>
+  a {
+    color: inherit;
+  }
+  
+  a:hover,
+  a:active {
+    color: inherit;
+  }
+
+  .nav {
+    margin-bottom: 1em;
+  }
+</style>
 <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="stopwatch-tab" data-toggle="tab" href="#stopwatch" role="tab" aria-controls="stopwatch" aria-selected="true">Stopwatch</a>
@@ -12,7 +26,9 @@ clockDiv.innerHTML = `
 </ul>
 
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="stopwatch" role="tabpanel" aria-labelledby="stopwatch-tab">Stopwatch</div>
+  <div class="tab-pane fade show active" id="stopwatch" role="tabpanel" aria-labelledby="stopwatch-tab">
+    <button class="btn btn-primary" type="submit">Start</button>
+  </div>
   <div class="tab-pane fade" id="timer" role="tabpanel" aria-labelledby="timer-tab">Timer</div>
 </div>
 `
@@ -34,7 +50,7 @@ export class Clock extends Window {
         if (!this.stopWatchTab.classList.contains('show active')) {
           this.stopWatchNavItem.setAttribute('class', 'nav-link active')
           this.stopWatchTab.setAttribute('class', 'tab-pane fade show active')
-          
+
           this.timerNavItem.classList.remove('active')
           this.timerTab.classList.remove('show')
           this.timerTab.classList.remove('active')
@@ -43,7 +59,7 @@ export class Clock extends Window {
         if (!this.timerTab.classList.contains('show active')) {
           this.timerNavItem.setAttribute('class', 'nav-link active')
           this.timerTab.setAttribute('class', 'tab-pane fade show active')
-          
+
           this.stopWatchNavItem.classList.remove('active')
           this.stopWatchTab.classList.remove('show')
           this.stopWatchTab.classList.remove('active')
