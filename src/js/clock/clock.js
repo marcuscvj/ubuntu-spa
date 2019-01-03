@@ -124,7 +124,7 @@ export class Clock extends Window {
       if (!this.runStopwatch) {
         clearInterval(counter)
       } else {
-        this.stopWatchTab.firstElementChild.innerHTML = seconds
+        this.stopWatchTab.firstElementChild.innerHTML = this.displayTime(seconds)
         seconds++
       }
     }, 1000)
