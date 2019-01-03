@@ -90,8 +90,14 @@ export class Clock extends Window {
           this.stopWatchTab.classList.remove('active')
         }
       } else if (event.target.id === 'timer-btn') {
-        this.modalBody.querySelector('#time-input').innerHTML = ''
-        this.timer(0, 2, 10)
+        let timeInputs = this.modalBody.querySelector('#time-input').querySelectorAll('input')
+
+        let h = parseInt(timeInputs[0].value)
+        let m = parseInt(timeInputs[1].value)
+        let s = parseInt(timeInputs[2].value)
+
+        this.timer(h, m, s)
+        this.modalBody.querySelector('#time-input').hidden = true
       }
     })
   }
@@ -115,13 +121,13 @@ export class Clock extends Window {
         let h = Math.floor(totalSeconds / 3600) % 24
         let m = Math.floor(totalSeconds / 60) % 60
         let s = totalSeconds % 60
-
         let time = checkTime(h) + ':' + checkTime(m) + ':' + checkTime(s)
 
         this.timerTab.firstElementChild.innerHTML = time
         totalSeconds--
         if (totalSeconds < 0) {
           clearInterval(timer)
+          this.modalBody.querySelector('#timer-btn').hidden = true
         }
       }
     }, 1000)
