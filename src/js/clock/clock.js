@@ -7,7 +7,7 @@ export class Clock extends Window {
     this.modalIcon.setAttribute('src', '/image/nav/clock.png')
     this.modalIcon.setAttribute('alt', 'Clock')
     this.modalBody.appendChild(template.content.cloneNode(true))
-    
+
     this.runStopwatch = true
     this.runTimer = true
 
