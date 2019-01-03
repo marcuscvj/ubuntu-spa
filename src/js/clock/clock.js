@@ -62,7 +62,7 @@ export class Clock extends Window {
     this.modalIcon.setAttribute('alt', 'Clock')
     this.modalBody.appendChild(clockDiv.content.cloneNode(true))
 
-    this.stop = false
+    this.running = true
 
     this.stopWatchNavItem = this.modalBody.querySelector('#stopwatch-tab')
     this.timerNavItem = this.modalBody.querySelector('#timer-tab')
@@ -96,13 +96,24 @@ export class Clock extends Window {
         let m = parseInt(timeInputs[1].value)
         let s = parseInt(timeInputs[2].value)
 
-        this.timer(h, m, s)
+        this.timer(h, m, s, this.running)
         this.modalBody.querySelector('#time-input').hidden = true
+      } else if (event.target.id === 'timer-new-btn') {
+        this.running = false
+        this.modalBody.querySelector('#time-input').hidden = false
+        this.timerTab.firstElementChild.hidden = true
+
+        console.log('setting running to false')
       }
     })
   }
 
-  timer (hours, minutes, seconds) {
+  timer (hours, minutes, seconds, running) {
+    if (!running) {
+
+      return
+    }
+
     let hoursToSeconds = hours * 60 * 60
     let minutesToSeconds = minutes * 60
     let totalSeconds = hoursToSeconds + minutesToSeconds + seconds
