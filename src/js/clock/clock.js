@@ -16,7 +16,8 @@ clockDiv.innerHTML = `
     margin-bottom: 1em;
   }
 
-  #time {
+  #time,
+  #stopwatch-time {
     font-size: 5rem;
   }
 
@@ -35,7 +36,9 @@ clockDiv.innerHTML = `
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="stopwatch" role="tabpanel" aria-labelledby="stopwatch-tab">
-    <button class="btn btn-primary" type="submit">Start</button>
+    <p id="stopwatch-time"></p>
+    <button id="stopwatch-start-btn" class="btn btn-primary" type="submit">Start</button>
+    <button id="stopwatch-reset-btn" class="btn btn-light" type="submit">Reset</button>
   </div>
   <div class="tab-pane fade" id="timer" role="tabpanel" aria-labelledby="timer-tab">
     <p id="time"></p>
@@ -61,8 +64,9 @@ export class Clock extends Window {
     this.modalIcon.setAttribute('src', '/image/nav/clock.png')
     this.modalIcon.setAttribute('alt', 'Clock')
     this.modalBody.appendChild(clockDiv.content.cloneNode(true))
-
-    this.running = true
+    
+    this.runStopwatch = true
+    this.runTimer = true
 
     this.stopWatchNavItem = this.modalBody.querySelector('#stopwatch-tab')
     this.timerNavItem = this.modalBody.querySelector('#timer-tab')
@@ -88,8 +92,12 @@ export class Clock extends Window {
           this.stopWatchTab.classList.remove('show')
           this.stopWatchTab.classList.remove('active')
         }
+      } else if (event.target.id === 'stopwatch-start-btn') {
+        this.stopwatch()
+      } else if (event.target.id === 'stopwatch-reset-btn') {
+        this.runStopwatch = false
       } else if (event.target.id === 'timer-btn') {
-        this.running = true
+        this.runTimer = true
         let timeInputs = this.modalBody.querySelector('#time-input').querySelectorAll('input')
 
         let h = parseInt(timeInputs[0].value)
@@ -101,12 +109,25 @@ export class Clock extends Window {
         this.timerTab.firstElementChild.hidden = false
         this.modalBody.querySelector('#time-input').hidden = true
       } else if (event.target.id === 'timer-new-btn') {
-        this.running = false
+        this.runTimer = false
         this.modalBody.querySelector('#time-input').hidden = false
         this.modalBody.querySelector('#timer-btn').hidden = false
         this.timerTab.firstElementChild.hidden = true
       }
     })
+  }
+
+  stopwatch () {
+    let seconds = 0
+
+    let counter = setInterval(() => {
+      if (!this.runStopwatch) {
+        clearInterval(counter)
+      } else {
+        this.stopWatchTab.firstElementChild.innerHTML = seconds
+        seconds++
+      }
+    }, 1000)
   }
 
   timer (hours, minutes, seconds) {
@@ -115,7 +136,7 @@ export class Clock extends Window {
     let totalSeconds = hoursToSeconds + minutesToSeconds + seconds
 
     let timer = setInterval(() => {
-      if (!this.running) {
+      if (!this.runTimer) {
         clearInterval(timer)
       } else {
         this.timerTab.firstElementChild.innerHTML = this.displayTime(totalSeconds)
