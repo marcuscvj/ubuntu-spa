@@ -106,11 +106,13 @@ export class Clock extends Window {
         let s = parseInt(timeInputs[2].value)
 
         this.timer(h, m, s)
+
         this.modalBody.querySelector('#timer-btn').hidden = true
         this.timerTab.firstElementChild.hidden = false
         this.modalBody.querySelector('#time-input').hidden = true
       } else if (event.target.id === 'timer-new-btn') {
         this.runTimer = false
+
         this.modalBody.querySelector('#time-input').hidden = false
         this.modalBody.querySelector('#timer-btn').hidden = false
         this.timerTab.firstElementChild.hidden = true
@@ -140,6 +142,7 @@ export class Clock extends Window {
     let timer = setInterval(() => {
       if (!this.runTimer) {
         clearInterval(timer)
+        this.timerTab.firstElementChild.innerHTML = '00:00:00'
       } else {
         this.timerTab.firstElementChild.innerHTML = this.displayTime(totalSeconds)
         totalSeconds--
