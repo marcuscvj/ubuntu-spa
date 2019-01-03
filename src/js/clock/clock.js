@@ -26,27 +26,28 @@ export class Clock extends Window {
 
     this.stopWatchNavItem = this.modalBody.querySelector('#stopwatch-tab')
     this.timerNavItem = this.modalBody.querySelector('#timer-tab')
-
     this.stopWatchTab = this.modalBody.querySelector('#stopwatch')
     this.timerTab = this.modalBody.querySelector('#timer')
 
     this.modalBody.addEventListener('click', event => {
       if (event.target.id === 'stopwatch-tab') {
         if (!this.stopWatchTab.classList.contains('show active')) {
+          this.stopWatchNavItem.setAttribute('class', 'nav-link active')
           this.stopWatchTab.setAttribute('class', 'tab-pane fade show active')
           
+          this.timerNavItem.classList.remove('active')
           this.timerTab.classList.remove('show')
           this.timerTab.classList.remove('active')
         }
-        console.log('Stopwatch')
       } else if (event.target.id === 'timer-tab') {
         if (!this.timerTab.classList.contains('show active')) {
+          this.timerNavItem.setAttribute('class', 'nav-link active')
           this.timerTab.setAttribute('class', 'tab-pane fade show active')
           
+          this.stopWatchNavItem.classList.remove('active')
           this.stopWatchTab.classList.remove('show')
           this.stopWatchTab.classList.remove('active')
         }
-        console.log('Timer')
       }
     })
   }
