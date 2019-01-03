@@ -50,6 +50,7 @@ clockDiv.innerHTML = `
     </div>
 
     <button id="timer-btn" class="btn btn-primary" type="submit">Start</button>
+    <button id="timer-new-btn" class="btn btn-light" type="submit">Enter new time</button>
   </div>
 </div>
 `
@@ -90,7 +91,7 @@ export class Clock extends Window {
         }
       } else if (event.target.id === 'timer-btn') {
         this.modalBody.querySelector('#time-input').innerHTML = ''
-        this.timer(1, 2, 30)
+        this.timer(0, 2, 10)
       }
     })
   }
@@ -100,11 +101,24 @@ export class Clock extends Window {
     let minutesToSeconds = minutes * 60
     let totalSeconds = hoursToSeconds + minutesToSeconds + seconds
 
+    function checkTime (i) {
+      if (i < 10) {
+        i = '0' + i
+      }
+      return i
+    }
+
     let timer = setInterval(() => {
       if (this.stop) {
         clearInterval(timer)
       } else {
-        this.timerTab.firstElementChild.innerHTML = totalSeconds
+        let h = Math.floor(totalSeconds / 3600) % 24
+        let m = Math.floor(totalSeconds / 60) % 60
+        let s = totalSeconds % 60
+
+        let time = checkTime(h) + ':' + checkTime(m) + ':' + checkTime(s)
+
+        this.timerTab.firstElementChild.innerHTML = time
         totalSeconds--
         if (totalSeconds < 0) {
           clearInterval(timer)
