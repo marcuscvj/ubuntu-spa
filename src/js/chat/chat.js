@@ -50,8 +50,10 @@ export class Chat extends Window {
     // if chat-form does not exists in DOM
     if (!document.querySelector('chat-form')) {
       this.modalBody.appendChild(inputForm.content.cloneNode(true))
-    } else {
+    } else if (window.localStorage.getItem('user')) {
       this.modalBody.appendChild(messageForm.content.cloneNode(true))
+    } else {
+      this.modalBody.appendChild(inputForm.content.cloneNode(true))
     }
 
     const socket = new WebSocket(this.url)
@@ -60,10 +62,18 @@ export class Chat extends Window {
       let msg = JSON.parse(event.data)
       console.log(msg) // TA BORT SENARE
 
-      if (msg.type === 'message') {
+      if (msg.type === 'message' && msg.channel === this.channel) {
         let str = msg.username + ': ' + msg.data + '&#010;'
         this.modalBody.querySelector('textarea').innerHTML += str
       }
+    })
+
+    this.modalCloseBtn.addEventListener('click', event => {
+      socket.close()
+    })
+
+    this.modalFooterCloseBtn.addEventListener('click', event => {
+      socket.close()
     })
 
     this.modalBody.addEventListener('input', event => {
@@ -71,7 +81,6 @@ export class Chat extends Window {
 
       if (event.target.name === 'channel') {
         this.channel = event.target.value
-        console.log(this.channel) // TA BORT SENARE
       }
     })
 
