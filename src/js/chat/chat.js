@@ -20,21 +20,22 @@ messageForm.innerHTML = `
     overflow-y: scroll;
   }
 </style>
-<form id="message-form" autocomplete="off">
-  <div class="form-group">
-    <div class="input-group">
-      <div class="input-group-prepend">
-      <div class="input-group-text">#</div>
-      </div>
-      <input type="text" class="form-control" name="channel" id="inlineFormInputChannel" placeholder="channel">
+<div id="select-channel" class="form-group">
+  <div class="input-group">
+    <div class="input-group-prepend">
+    <div class="input-group-text">#</div>
     </div>
+    <input type="text" class="form-control" name="channel" placeholder="channel">
   </div>
+</div>
+<form id="message-form" autocomplete="off">
   <div class="form-group">
     <textarea class="form-control" rows="8" readonly></textarea>
   </div>
   <div class="form-group">
-    <input class="form-control" type="text" name="message" placeholder="Send a message">
+    <textarea id="message" class="form-control" name="message" rows="2" placeholder="Send a message"></textarea>
   </div>
+  <button class="btn btn-primary" type="submit">Send</button>
 </form>
 `
 
@@ -66,7 +67,9 @@ export class Chat extends Window {
     })
 
     this.modalBody.addEventListener('input', event => {
-      if (event.target.id === 'inlineFormInputChannel') {
+      event.preventDefault()
+
+      if (event.target.name === 'channel') {
         this.channel = event.target.value
         console.log(this.channel) // TA BORT SENARE
       }
@@ -94,7 +97,7 @@ export class Chat extends Window {
         }
 
         socket.send(JSON.stringify(sendObj))
-        this.modalBody.querySelector('input').value = ''
+        this.modalBody.querySelector('#message').value = ''
       }
     })
   }
