@@ -68,14 +68,6 @@ export class Chat extends Window {
       }
     })
 
-    this.modalCloseBtn.addEventListener('click', event => {
-      socket.close()
-    })
-
-    this.modalFooterCloseBtn.addEventListener('click', event => {
-      socket.close()
-    })
-
     this.modalBody.addEventListener('input', event => {
       event.preventDefault()
 
@@ -108,6 +100,15 @@ export class Chat extends Window {
         socket.send(JSON.stringify(sendObj))
         this.modalBody.querySelector('#message').value = ''
       }
+    })
+
+    // Event listeners to close the socket when the user closes the window
+    this.modalCloseBtn.addEventListener('click', event => {
+      socket.close()
+    })
+
+    this.modalFooterCloseBtn.addEventListener('click', event => {
+      socket.close()
     })
   }
 }
