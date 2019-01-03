@@ -50,7 +50,7 @@ clockDiv.innerHTML = `
     </div>
 
     <button id="timer-btn" class="btn btn-primary" type="submit">Start</button>
-    <button id="timer-new-btn" class="btn btn-light" type="submit">Enter new time</button>
+    <button id="timer-new-btn" class="btn btn-light" type="submit">Reset</button>
   </div>
 </div>
 `
@@ -97,11 +97,13 @@ export class Clock extends Window {
         let s = parseInt(timeInputs[2].value)
 
         this.timer(h, m, s)
+        this.modalBody.querySelector('#timer-btn').hidden = true
         this.timerTab.firstElementChild.hidden = false
         this.modalBody.querySelector('#time-input').hidden = true
       } else if (event.target.id === 'timer-new-btn') {
         this.running = false
         this.modalBody.querySelector('#time-input').hidden = false
+        this.modalBody.querySelector('#timer-btn').hidden = false
         this.timerTab.firstElementChild.hidden = true
       }
     })
@@ -112,30 +114,34 @@ export class Clock extends Window {
     let minutesToSeconds = minutes * 60
     let totalSeconds = hoursToSeconds + minutesToSeconds + seconds
 
-    function checkTime (i) {
-      if (i < 10) {
-        i = '0' + i
-      }
-      return i
-    }
-
     let timer = setInterval(() => {
       if (!this.running) {
         clearInterval(timer)
       } else {
-        let h = Math.floor(totalSeconds / 3600) % 24
-        let m = Math.floor(totalSeconds / 60) % 60
-        let s = totalSeconds % 60
-        let time = checkTime(h) + ':' + checkTime(m) + ':' + checkTime(s)
-
-        this.timerTab.firstElementChild.innerHTML = time
+        this.timerTab.firstElementChild.innerHTML = this.displayTime(totalSeconds)
         totalSeconds--
         if (totalSeconds < 0) {
           clearInterval(timer)
-          this.modalBody.querySelector('#timer-btn').hidden = true
         }
       }
     }, 1000)
+  }
+
+  displayTime (seconds) {
+    let h = Math.floor(seconds / 3600) % 24
+    let m = Math.floor(seconds / 60) % 60
+    let s = seconds % 60
+    let time = this.checkTime(h) + ':' + this.checkTime(m) + ':' + this.checkTime(s)
+
+    return time
+  }
+
+  checkTime (i) {
+    if (i < 10) {
+      i = '0' + i
+    }
+
+    return i
   }
 }
 
