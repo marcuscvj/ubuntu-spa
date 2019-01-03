@@ -81,7 +81,6 @@ export class Clock extends Window {
         }
       } else if (event.target.id === 'timer-tab') {
         if (!this.timerTab.classList.contains('show active')) {
-
           this.timerNavItem.setAttribute('class', 'nav-link active')
           this.timerTab.setAttribute('class', 'tab-pane fade show active')
 
@@ -90,30 +89,25 @@ export class Clock extends Window {
           this.stopWatchTab.classList.remove('active')
         }
       } else if (event.target.id === 'timer-btn') {
+        this.running = true
         let timeInputs = this.modalBody.querySelector('#time-input').querySelectorAll('input')
 
         let h = parseInt(timeInputs[0].value)
         let m = parseInt(timeInputs[1].value)
         let s = parseInt(timeInputs[2].value)
 
-        this.timer(h, m, s, this.running)
+        this.timer(h, m, s)
+        this.timerTab.firstElementChild.hidden = false
         this.modalBody.querySelector('#time-input').hidden = true
       } else if (event.target.id === 'timer-new-btn') {
         this.running = false
         this.modalBody.querySelector('#time-input').hidden = false
         this.timerTab.firstElementChild.hidden = true
-
-        console.log('setting running to false')
       }
     })
   }
 
-  timer (hours, minutes, seconds, running) {
-    if (!running) {
-
-      return
-    }
-
+  timer (hours, minutes, seconds) {
     let hoursToSeconds = hours * 60 * 60
     let minutesToSeconds = minutes * 60
     let totalSeconds = hoursToSeconds + minutesToSeconds + seconds
@@ -126,7 +120,7 @@ export class Clock extends Window {
     }
 
     let timer = setInterval(() => {
-      if (this.stop) {
+      if (!this.running) {
         clearInterval(timer)
       } else {
         let h = Math.floor(totalSeconds / 3600) % 24
