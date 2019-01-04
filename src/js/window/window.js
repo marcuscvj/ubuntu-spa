@@ -28,6 +28,7 @@ export class Window extends window.HTMLElement {
   }
 
   connectedCallback () {
+    console.log(this)
     this.modalTitle.textContent = this.titleText
 
     this.modalCloseBtn.addEventListener('click', event => {
@@ -39,6 +40,11 @@ export class Window extends window.HTMLElement {
     })
 
     this.surface.addEventListener('touchstart', this.dragStart, false)
+    this.surface.addEventListener('touchend', this.dragEnd, false)
+    this.surface.addEventListener('touchmove', this.drag, false)
+    this.surface.addEventListener('mousedown', this.dragStart, false)
+    this.surface.addEventListener('mouseup', this.dragEnd, false)
+    this.surface.addEventListener('mousemove', this.drag, false)
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -64,7 +70,36 @@ export class Window extends window.HTMLElement {
       this.active = true
     }
   }
-  
+
+  dragEnd (event) {
+    this.initialX = this.currentX
+    this.initialY = this.currentY
+
+    this.active = false
+  }
+
+  drag (event) {
+    if (this.active) {
+      event.preventDefault()
+
+      if (event.type === 'touchmove') {
+        this.currentX = event.touches[0].clientX - this.initialX
+        this.currentY = event.touches[0].clientY - this.initialY
+      } else {
+        this.currentX = event.clientX - this.initialX
+        this.currentY = event.clientY - this.initialY
+      }
+
+      this.offsetX = this.currentX
+      this.offsetY = this.currentY
+
+      this.setTranslate(this.currentX, this.currentY, this.modal)
+    }
+  }
+
+  setTranslate (posX, posY, element) {
+    element.style.transform = 'translate3d(' + posX + 'px, ' + posY + 'px, 0)'
+  }
 }
 
 window.customElements.define('window-form', Window)

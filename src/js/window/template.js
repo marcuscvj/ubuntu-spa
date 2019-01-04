@@ -6,6 +6,8 @@ template.innerHTML = `
   .modal {
     display: initial;
     position: unset;
+    touch-action: none;
+    user-select: none;
   }
 
   .modal-content {
@@ -16,6 +18,10 @@ template.innerHTML = `
     box-shadow:          10px 10px 50px 1px rgba(0, 0, 0, 0.7);
   }
 
+  .modal-content:hover {
+    cursor: pointer;
+  }
+
   .modal-header {
     padding: 0.2rem 1rem;
     background: linear-gradient(#616155 , #483C3C);
@@ -23,6 +29,8 @@ template.innerHTML = `
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+
+  
 
   .modal-header .close {
     padding: 0.9rem 0.9rem;
