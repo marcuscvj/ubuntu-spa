@@ -11,6 +11,8 @@ template.innerHTML = `
   .modal-dialog {
     position: absolute;
     width: inherit;
+    top: 5%;
+    left: 5%;
   }
 
   .modal-content {

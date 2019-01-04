@@ -14,6 +14,8 @@ export class Window extends window.HTMLElement {
     this.modalFooterCloseBtn = this.shadowRoot.querySelector('#modal-footer-close-btn')
     this.modalIcon = this.shadowRoot.querySelector('#modal-icon')
 
+    // this.modal.style.top += 5 increase the top value for the divs when created
+
     this.surface = document.querySelector('#surface')
     this.active = false
     this.currentX = undefined
