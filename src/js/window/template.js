@@ -87,7 +87,7 @@ template.innerHTML = `
 </style>
 
 <div id="modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div id="modal-dialog" class="modal-dialog" role="document">
     <div id="modal-content" class="modal-content">
       <div id="modal-header" class="modal-header">
         <img id="modal-icon">

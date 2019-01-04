@@ -83,20 +83,15 @@ export class Window extends window.HTMLElement {
       event.preventDefault()
 
       if (event.type === 'touchmove') {
-        this.currentX = event.clientX // - this.initialX
-        this.currentY = event.clientY // - this.initialY
+        this.currentX = event.clientX
+        this.currentY = event.clientY
       } else {
-        this.currentX = event.clientX // - this.initialX
-        this.currentY = event.clientY // - this.initialY
+        this.currentX = event.clientX
+        this.currentY = event.clientY
       }
 
       this.offsetX = this.currentX
       this.offsetY = this.currentY
-
-      console.log(event.clientX)
-      console.log(event.clientY)
-      console.log(this.currentX)
-      console.log(this.currentY)
 
       let style = 'left:' + this.currentX + 'px;' + 'top:' + this.currentY + 'px;'
       this.modal.setAttribute('style', style)
