@@ -6,7 +6,7 @@ export class Window extends window.HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
     this.titleText = 'Window Object'
-    this.modal = this.shadowRoot.querySelector('#modal-content')
+    this.modal = this.shadowRoot.querySelector('#modal-dialog')
     this.modalHeader = this.shadowRoot.querySelector('#modal-header')
     this.modalTitle = this.shadowRoot.querySelector('#title')
     this.modalBody = this.shadowRoot.querySelector('#body')

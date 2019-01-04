@@ -8,6 +8,11 @@ template.innerHTML = `
     position: absolute;
   }
 
+  .modal-dialog {
+    position: absolute;
+    width: inherit;
+  }
+
   .modal-content {
     background-color: #F2F1F0;
     border-radius: .25rem;
@@ -84,10 +89,17 @@ template.innerHTML = `
   *:focus {
     outline: 0 !important;
   }
+
+  @media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 500px;
+        margin: 0;
+    }
+  }
 </style>
 
-<div id="modal" class="modal" tabindex="-1" role="dialog">
-  <div id="modal-dialog" class="modal-dialog" role="document">
+<div id="modal" class="modal" tabindex="-1">
+  <div id="modal-dialog" class="modal-dialog" aria-hidden="true">
     <div id="modal-content" class="modal-content">
       <div id="modal-header" class="modal-header">
         <img id="modal-icon">
