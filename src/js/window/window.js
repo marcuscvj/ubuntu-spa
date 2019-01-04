@@ -6,7 +6,8 @@ export class Window extends window.HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
     this.titleText = 'Window Object'
-    this.modal = this.shadowRoot.querySelector('#modal')
+    this.modal = this.shadowRoot.querySelector('#modal-content')
+    this.modalHeader = this.shadowRoot.querySelector('#modal-header')
     this.modalTitle = this.shadowRoot.querySelector('#title')
     this.modalBody = this.shadowRoot.querySelector('#body')
     this.modalCloseBtn = this.shadowRoot.querySelector('#modal-close')
@@ -28,7 +29,6 @@ export class Window extends window.HTMLElement {
   }
 
   connectedCallback () {
-    console.log(this)
     this.modalTitle.textContent = this.titleText
 
     this.modalCloseBtn.addEventListener('click', event => {
@@ -39,12 +39,12 @@ export class Window extends window.HTMLElement {
       this.setAttribute('hidden', '')
     })
 
-    this.surface.addEventListener('touchstart', this.dragStart, false)
-    this.surface.addEventListener('touchend', this.dragEnd, false)
-    this.surface.addEventListener('touchmove', this.drag, false)
-    this.surface.addEventListener('mousedown', this.dragStart, false)
-    this.surface.addEventListener('mouseup', this.dragEnd, false)
-    this.surface.addEventListener('mousemove', this.drag, false)
+    this.addEventListener('touchstart', this.dragStart, false)
+    this.addEventListener('touchend', this.dragEnd, false)
+    this.addEventListener('touchmove', this.drag, false)
+    this.addEventListener('mousedown', this.dragStart, false)
+    this.addEventListener('mouseup', this.dragEnd, false)
+    this.addEventListener('mousemove', this.drag, false)
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -59,14 +59,14 @@ export class Window extends window.HTMLElement {
 
   dragStart (event) {
     if (event.type === 'touchstart') {
-      this.initialX = event.touches[0].clientX - this.offsetX
-      this.initialY = event.touches[0].clientY - this.offsetY
+      this.initialX = event.clientX - this.offsetX
+      this.initialY = event.clientY - this.offsetY
     } else {
       this.initialX = event.clientX - this.offsetX
       this.initialY = event.clientY - this.offsetY
     }
 
-    if (event.target === this.modal) {
+    if (event.target === this) {
       this.active = true
     }
   }
@@ -83,22 +83,24 @@ export class Window extends window.HTMLElement {
       event.preventDefault()
 
       if (event.type === 'touchmove') {
-        this.currentX = event.touches[0].clientX - this.initialX
-        this.currentY = event.touches[0].clientY - this.initialY
+        this.currentX = event.clientX // - this.initialX
+        this.currentY = event.clientY // - this.initialY
       } else {
-        this.currentX = event.clientX - this.initialX
-        this.currentY = event.clientY - this.initialY
+        this.currentX = event.clientX // - this.initialX
+        this.currentY = event.clientY // - this.initialY
       }
 
       this.offsetX = this.currentX
       this.offsetY = this.currentY
 
-      this.setTranslate(this.currentX, this.currentY, this.modal)
-    }
-  }
+      console.log(event.clientX)
+      console.log(event.clientY)
+      console.log(this.currentX)
+      console.log(this.currentY)
 
-  setTranslate (posX, posY, element) {
-    element.style.transform = 'translate3d(' + posX + 'px, ' + posY + 'px, 0)'
+      let style = 'left:' + this.currentX + 'px;' + 'top:' + this.currentY + 'px;'
+      this.modal.setAttribute('style', style)
+    }
   }
 }
 
