@@ -17,6 +17,10 @@ export class Memory extends Window {
       img.setAttribute('src', '../../image/memory/0.png')
       this.modalBody.appendChild(img)
 
+      img.addEventListener('click', () => {
+        console.log(i)
+      })
+
       if ((i + 1) % this.cols === 0) {
         let br = document.createElement('br')
         this.modalBody.appendChild(br)
@@ -32,7 +36,14 @@ export class Memory extends Window {
       arr.push(i)
     }
 
-    debugger
+    for (let i = arr.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1))
+      let temp = arr[i]
+      arr[i] = arr[j]
+      arr[j] = temp
+    }
+
+    return arr
   }
 }
 
