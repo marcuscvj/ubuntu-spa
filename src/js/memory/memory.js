@@ -11,21 +11,32 @@ export class Memory extends Window {
     this.rows = 4
     this.cols = 4
     this.tiles = this.getPictureArray(this.rows, this.cols)
+    this.bricks = this.modalBody.querySelector('#bricks')
 
-    for (let i = 0; i < this.rows * this.cols; i++) {
+    this.tiles.forEach((tile, index) => {
+      let aTag = document.createElement('a')
+      aTag.setAttribute('src', '#')
+      this.bricks.appendChild(aTag)
+
       let img = document.createElement('img')
       img.setAttribute('src', '../../image/memory/0.png')
-      this.modalBody.appendChild(img)
+      aTag.appendChild(img)
 
-      img.addEventListener('click', () => {
-        console.log(i)
+      img.addEventListener('click', event => {
+        console.log(index)
+        this.turnBrick(tile, index, img)
       })
 
-      if ((i + 1) % this.cols === 0) {
+      if ((index + 1) % this.cols === 0) {
         let br = document.createElement('br')
-        this.modalBody.appendChild(br)
+        this.bricks.appendChild(br)
       }
-    }
+    })
+  }
+
+  turnBrick (tile, index, element) {
+    let img = element.nodeName === 'IMG' ? element : element.firstElementChild
+    img.src = '../../image/memory/' + tile + '.png'
   }
 
   getPictureArray (rows, cols) {

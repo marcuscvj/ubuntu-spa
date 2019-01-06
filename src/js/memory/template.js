@@ -5,6 +5,10 @@ template.innerHTML = `
     max-width: 25%;
   }
 </style>
+
+<div id="bricks">
+  
+</div>
 `
 
 export default template
