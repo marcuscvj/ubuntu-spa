@@ -4,6 +4,10 @@ template.innerHTML = `
   #body img {
     max-width: 25%;
   }
+  
+  .removed {
+    visibility: hidden;
+  }
 </style>
 
 <div id="bricks">

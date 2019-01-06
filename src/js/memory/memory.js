@@ -15,6 +15,7 @@ export class Memory extends Window {
 
     this.turn1 = undefined
     this.turn2 = undefined
+    this.lastTile = undefined
 
     this.tiles.forEach((tile, index) => {
       let aTag = document.createElement('a')
@@ -25,8 +26,10 @@ export class Memory extends Window {
       img.setAttribute('src', '../../image/memory/0.png')
       aTag.appendChild(img)
 
-      img.addEventListener('click', event => {
+      aTag.addEventListener('click', event => {
         let img = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
+        console.log(event.target.nodeName)
+        console.log(event.target)
         this.turnBrick(tile, index, img)
       })
 
@@ -40,13 +43,35 @@ export class Memory extends Window {
   turnBrick (tile, index, img) {
     img.src = '../../image/memory/' + tile + '.png'
 
-    this.turn1 = img
-
     if (!this.turn1) {
       // First brick is clicked
-      
+      this.turn1 = img
+      this.lastTile = tile
     } else {
       // Second brick is clicked
+
+      /* if (img === this.turn1) {
+        return
+      } */
+      this.turn2 = img
+
+      if (tile === this.lastTile) {
+        console.log('Pair!')
+
+        window.setTimeout(() => {
+          this.turn1.classList.add('removed')
+          this.turn2.classList.add('removed')
+          this.turn1 = undefined
+          this.turn2 = undefined
+        }, 100)
+      } else {
+        window.setTimeout(() => {
+          this.turn1.src = '../../image/memory/0.png'
+          this.turn2.src = '../../image/memory/0.png'
+          this.turn1 = undefined
+          this.turn2 = undefined
+        }, 500)
+      }
     }
   }
 
