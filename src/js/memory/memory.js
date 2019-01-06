@@ -8,14 +8,16 @@ export class Memory extends Window {
     this.modalIcon.setAttribute('alt', 'Memory')
     this.modalBody.appendChild(template.content.cloneNode(true))
 
-    this.rows = 4
-    this.cols = 4
+    this.rows = 2
+    this.cols = 2
     this.tiles = this.getPictureArray(this.rows, this.cols)
     this.bricks = this.modalBody.querySelector('#bricks')
 
     this.turn1 = undefined
     this.turn2 = undefined
     this.lastTile = undefined
+    this.pairs = 0
+    this.tries = 0
 
     this.tiles.forEach((tile, index) => {
       let aTag = document.createElement('a')
@@ -43,6 +45,10 @@ export class Memory extends Window {
   turnBrick (tile, index, img) {
     img.src = '../../image/memory/' + tile + '.png'
 
+    if (this.turn2) {
+      return
+    }
+
     if (!this.turn1) {
       // First brick is clicked
       this.turn1 = img
@@ -50,20 +56,27 @@ export class Memory extends Window {
     } else {
       // Second brick is clicked
 
-      /* if (img === this.turn1) {
+      if (img === this.turn1) {
         return
-      } */
+      }
+
+      this.tries++
       this.turn2 = img
 
       if (tile === this.lastTile) {
-        console.log('Pair!')
+        // Found a pair
+        this.pairs++
+
+        if (this.pairs === (this.cols * this.rows) / 2) {
+          console.log('Won on ' + this.tries + ' tries!')
+        }
 
         window.setTimeout(() => {
           this.turn1.classList.add('removed')
           this.turn2.classList.add('removed')
           this.turn1 = undefined
           this.turn2 = undefined
-        }, 100)
+        }, 300)
       } else {
         window.setTimeout(() => {
           this.turn1.src = '../../image/memory/0.png'
