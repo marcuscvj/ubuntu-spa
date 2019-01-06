@@ -13,9 +13,12 @@ export class Memory extends Window {
     this.tiles = this.getPictureArray(this.rows, this.cols)
     this.bricks = this.modalBody.querySelector('#bricks')
 
+    this.turn1 = undefined
+    this.turn2 = undefined
+
     this.tiles.forEach((tile, index) => {
       let aTag = document.createElement('a')
-      aTag.setAttribute('src', '#')
+      aTag.setAttribute('href', '#')
       this.bricks.appendChild(aTag)
 
       let img = document.createElement('img')
@@ -23,7 +26,7 @@ export class Memory extends Window {
       aTag.appendChild(img)
 
       img.addEventListener('click', event => {
-        console.log(index)
+        let img = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
         this.turnBrick(tile, index, img)
       })
 
@@ -34,9 +37,17 @@ export class Memory extends Window {
     })
   }
 
-  turnBrick (tile, index, element) {
-    let img = element.nodeName === 'IMG' ? element : element.firstElementChild
+  turnBrick (tile, index, img) {
     img.src = '../../image/memory/' + tile + '.png'
+
+    this.turn1 = img
+
+    if (!this.turn1) {
+      // First brick is clicked
+      
+    } else {
+      // Second brick is clicked
+    }
   }
 
   getPictureArray (rows, cols) {

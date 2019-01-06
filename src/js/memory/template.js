@@ -7,7 +7,6 @@ template.innerHTML = `
 </style>
 
 <div id="bricks">
-  
 </div>
 `
 
