@@ -13,6 +13,12 @@ template.innerHTML = `
     width: inherit;
     top: 5%;
     left: 5%;
+    z-index: 99998;
+  }
+  
+  .modal-on-top {
+    z-index: 99999;
+    background: rgba(255,255,255,.5);
   }
 
   .modal-content {
@@ -86,10 +92,6 @@ template.innerHTML = `
     color: #fff;
     background-color: #540c26;
     border-color: #630225;
-  }
-
-  *:focus {
-    outline: 0 !important;
   }
 
   @media (min-width: 576px) {

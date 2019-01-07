@@ -62,6 +62,7 @@ export class Window extends window.HTMLElement {
 
   dragStart (event) {
     if (event.type === 'touchstart') {
+      event.preventDefault()
       this.initialX = event.clientX - this.offsetX
       this.initialY = event.clientY - this.offsetY
     } else {
@@ -75,6 +76,7 @@ export class Window extends window.HTMLElement {
   }
 
   dragEnd (event) {
+    event.preventDefault()
     this.initialX = this.currentX
     this.initialY = this.currentY
 
@@ -82,9 +84,8 @@ export class Window extends window.HTMLElement {
   }
 
   drag (event) {
+    event.preventDefault()
     if (this.active) {
-      event.preventDefault()
-
       if (event.type === 'touchmove') {
         this.currentX = event.clientX
         this.currentY = event.clientY
@@ -92,9 +93,6 @@ export class Window extends window.HTMLElement {
         this.currentX = event.clientX
         this.currentY = event.clientY
       }
-
-      this.offsetX = this.currentX
-      this.offsetY = this.currentY
 
       let style = 'left:' + this.currentX + 'px;' + 'top:' + this.currentY + 'px;'
       this.modal.setAttribute('style', style)

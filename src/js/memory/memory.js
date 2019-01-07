@@ -7,7 +7,6 @@ export class Memory extends Window {
     this.modalIcon.setAttribute('src', '/image/nav/memory.png')
     this.modalIcon.setAttribute('alt', 'Memory')
     this.modalBody.appendChild(template.content.cloneNode(true))
-    this.sizeForm = this.modalBody.querySelector('#game-size')
     this.resultsDiv = this.modalBody.querySelector('#results')
     this.resultsDiv.setAttribute('class', 'alert alert-light')
     this.resultsDiv.innerHTML = 'Number of tries: '
@@ -22,16 +21,6 @@ export class Memory extends Window {
     this.lastTile = undefined
     this.pairs = 0
     this.tries = 0
-
-    /* this.sizeForm.addEventListener('submit', event => {
-      let element = event.target.firstElementChild
-      let selectedSize = element[element.options.selectedIndex].text
-
-      this.rows = parseInt(selectedSize.slice(0, 1))
-      this.cols = parseInt(selectedSize.slice(2, 3))
-      console.log(this.rows)
-      console.log(this.cols)
-    }) */
 
     this.tiles.forEach((tile, index) => {
       let aTag = document.createElement('a')
