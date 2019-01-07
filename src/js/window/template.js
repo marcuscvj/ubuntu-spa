@@ -5,7 +5,7 @@ template.innerHTML = `
 
   .modal {
     display: initial;
-    position: absolute;
+    position: fixed;
   }
 
   .modal-dialog {

@@ -87,6 +87,7 @@ body {
   padding-right: 55px;
   width: 60px;
   flex-grow: 0 !important;
+  z-index: 99999;
 }
 
 .nav-group {

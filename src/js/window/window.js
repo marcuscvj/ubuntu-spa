@@ -42,12 +42,12 @@ export class Window extends window.HTMLElement {
     })
 
     // Used to make the window move
-    /* this.addEventListener('touchstart', this.dragStart, false)
+    this.addEventListener('touchstart', this.dragStart, false)
     this.addEventListener('touchend', this.dragEnd, false)
     this.addEventListener('touchmove', this.drag, false)
     this.addEventListener('mousedown', this.dragStart, false)
     this.addEventListener('mouseup', this.dragEnd, false)
-    this.addEventListener('mousemove', this.drag, false) */
+    this.addEventListener('mousemove', this.drag, false)
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
