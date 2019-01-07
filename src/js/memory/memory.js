@@ -7,9 +7,13 @@ export class Memory extends Window {
     this.modalIcon.setAttribute('src', '/image/nav/memory.png')
     this.modalIcon.setAttribute('alt', 'Memory')
     this.modalBody.appendChild(template.content.cloneNode(true))
+    this.sizeForm = this.modalBody.querySelector('#game-size')
+    this.resultsDiv = this.modalBody.querySelector('#results')
+    this.resultsDiv.setAttribute('class', 'alert alert-light')
+    this.resultsDiv.innerHTML = 'Number of tries: '
 
-    this.rows = 2
-    this.cols = 2
+    this.rows = 4
+    this.cols = 4
     this.tiles = this.getPictureArray(this.rows, this.cols)
     this.bricks = this.modalBody.querySelector('#bricks')
 
@@ -19,9 +23,20 @@ export class Memory extends Window {
     this.pairs = 0
     this.tries = 0
 
+    /* this.sizeForm.addEventListener('submit', event => {
+      let element = event.target.firstElementChild
+      let selectedSize = element[element.options.selectedIndex].text
+
+      this.rows = parseInt(selectedSize.slice(0, 1))
+      this.cols = parseInt(selectedSize.slice(2, 3))
+      console.log(this.rows)
+      console.log(this.cols)
+    }) */
+
     this.tiles.forEach((tile, index) => {
       let aTag = document.createElement('a')
       aTag.setAttribute('href', '#')
+      aTag.setAttribute('tabindex', index + 1)
       this.bricks.appendChild(aTag)
 
       let img = document.createElement('img')
@@ -29,6 +44,7 @@ export class Memory extends Window {
       aTag.appendChild(img)
 
       aTag.addEventListener('click', event => {
+        event.preventDefault()
         let img = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
         console.log(event.target.nodeName)
         console.log(event.target)
@@ -55,12 +71,12 @@ export class Memory extends Window {
       this.lastTile = tile
     } else {
       // Second brick is clicked
-
       if (img === this.turn1) {
         return
       }
 
       this.tries++
+      this.resultsDiv.innerHTML = 'Number of tries: ' + this.tries
       this.turn2 = img
 
       if (tile === this.lastTile) {
@@ -68,12 +84,14 @@ export class Memory extends Window {
         this.pairs++
 
         if (this.pairs === (this.cols * this.rows) / 2) {
-          console.log('Won on ' + this.tries + ' tries!')
+          this.bricks.innerHTML = ''
+          this.resultsDiv.setAttribute('class', 'alert alert-success')
+          this.resultsDiv.innerHTML = 'You won on ' + this.tries + ' tries!'
         }
 
         window.setTimeout(() => {
-          this.turn1.classList.add('removed')
-          this.turn2.classList.add('removed')
+          this.turn1.parentNode.classList.add('removed')
+          this.turn2.parentNode.classList.add('removed')
           this.turn1 = undefined
           this.turn2 = undefined
         }, 300)

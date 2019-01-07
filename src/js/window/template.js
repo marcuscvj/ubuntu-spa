@@ -65,7 +65,7 @@ template.innerHTML = `
   }
 
   .btn {
-    padding: 0.1rem 0.5rem;
+    padding: 0.3rem 0.5rem;
   }
 
   .btn-light {
