@@ -6,17 +6,17 @@ export class Clock extends Window {
     super()
     this.appIcon.setAttribute('src', '/image/nav/clock.png')
     this.appIcon.setAttribute('alt', 'Clock')
-    this.modalBody.appendChild(template.content.cloneNode(true))
+    this.appBody.appendChild(template.content.cloneNode(true))
 
     this.runStopwatch = true
     this.runTimer = true
 
-    this.stopWatchNavItem = this.modalBody.querySelector('#stopwatch-tab')
-    this.timerNavItem = this.modalBody.querySelector('#timer-tab')
-    this.stopWatchTab = this.modalBody.querySelector('#stopwatch')
-    this.timerTab = this.modalBody.querySelector('#timer')
+    this.stopWatchNavItem = this.appBody.querySelector('#stopwatch-tab')
+    this.timerNavItem = this.appBody.querySelector('#timer-tab')
+    this.stopWatchTab = this.appBody.querySelector('#stopwatch')
+    this.timerTab = this.appBody.querySelector('#timer')
 
-    this.modalBody.addEventListener('click', event => {
+    this.appBody.addEventListener('click', event => {
       if (event.target.id === 'stopwatch-tab') {
         if (!this.stopWatchTab.classList.contains('show active')) {
           this.stopWatchNavItem.setAttribute('class', 'nav-link active')
@@ -42,7 +42,7 @@ export class Clock extends Window {
         this.runStopwatch = false
       } else if (event.target.id === 'timer-btn') {
         this.runTimer = true
-        let timeInputs = this.modalBody.querySelector('#time-input').querySelectorAll('input')
+        let timeInputs = this.appBody.querySelector('#time-input').querySelectorAll('input')
 
         let h = parseInt(timeInputs[0].value)
         let m = parseInt(timeInputs[1].value)
@@ -50,14 +50,14 @@ export class Clock extends Window {
 
         this.timer(h, m, s)
 
-        this.modalBody.querySelector('#timer-btn').hidden = true
+        this.appBody.querySelector('#timer-btn').hidden = true
         this.timerTab.firstElementChild.hidden = false
-        this.modalBody.querySelector('#time-input').hidden = true
+        this.appBody.querySelector('#time-input').hidden = true
       } else if (event.target.id === 'timer-new-btn') {
         this.runTimer = false
 
-        this.modalBody.querySelector('#time-input').hidden = false
-        this.modalBody.querySelector('#timer-btn').hidden = false
+        this.appBody.querySelector('#time-input').hidden = false
+        this.appBody.querySelector('#timer-btn').hidden = false
         this.timerTab.firstElementChild.hidden = true
       }
     })

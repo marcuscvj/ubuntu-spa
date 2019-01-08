@@ -12,13 +12,9 @@ export class Window extends window.HTMLElement {
     this.appHeader = this.shadowRoot.querySelector('.app-header')
     this.appTitle = this.shadowRoot.querySelector('.app-title')
     this.appBody = this.shadowRoot.querySelector('.app-body')
+    this.appHeaderCloseBtn = this.shadowRoot.querySelector('.close')
     this.appFooterCloseBtn = this.shadowRoot.querySelector('.app-close-btn')
     this.appIcon = this.shadowRoot.querySelector('.app-icon')
-
-    // console.log(this.app)
-    // console.log(this.appHeader)
-
-    // this.app.style.top += 5 increase the top value for the divs when created
 
     this.active = false
     this.currentX = undefined
@@ -40,6 +36,10 @@ export class Window extends window.HTMLElement {
       this.setAttribute('hidden', '')
     })
 
+    this.appHeaderCloseBtn.addEventListener('click', event => {
+      this.setAttribute('hidden', '')
+    })
+
     this.app.addEventListener('mousedown', event => {
       if (event.type === 'touchstart') {
         this.initialX = event.touches[0].clientX - this.offsetX
@@ -55,7 +55,8 @@ export class Window extends window.HTMLElement {
     })
 
     this.app.addEventListener('mouseup', event => {
-      console.log(event.type)
+      this.appHeader.classList.remove('app-active')
+
       this.initialX = this.currentX
       this.initialY = this.currentY
       this.active = false
@@ -64,8 +65,8 @@ export class Window extends window.HTMLElement {
     this.app.addEventListener('mousemove', event => {
       if (this.active) {
         event.preventDefault()
-        this.app.classList.add('app-dragging')
-        
+        this.appHeader.classList.add('app-active')
+
         if (event.type === 'touchmove') {
           this.initialX = event.touches[0].clientX - this.offsetX
           this.initialY = event.touches[0].clientY - this.offsetY

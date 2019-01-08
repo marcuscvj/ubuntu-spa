@@ -6,15 +6,15 @@ export class Memory extends Window {
     super()
     this.appIcon.setAttribute('src', '/image/nav/memory.png')
     this.appIcon.setAttribute('alt', 'Memory')
-    this.modalBody.appendChild(template.content.cloneNode(true))
-    this.resultsDiv = this.modalBody.querySelector('#results')
+    this.appBody.appendChild(template.content.cloneNode(true))
+    this.resultsDiv = this.appBody.querySelector('#results')
     this.resultsDiv.setAttribute('class', 'alert alert-light')
     this.resultsDiv.innerHTML = 'Number of tries: '
 
     this.rows = 4
     this.cols = 4
     this.tiles = this.getPictureArray(this.rows, this.cols)
-    this.bricks = this.modalBody.querySelector('#bricks')
+    this.bricks = this.appBody.querySelector('#bricks')
 
     this.turn1 = undefined
     this.turn2 = undefined

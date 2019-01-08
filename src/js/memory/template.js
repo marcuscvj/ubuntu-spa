@@ -9,7 +9,7 @@ template.innerHTML = `
     text-decoration: initial;
   }
 
-  #body img {
+  #bricks img {
     max-width: 25%;
   }
   

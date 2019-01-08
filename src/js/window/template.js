@@ -6,7 +6,7 @@ template.innerHTML = `
   #app {
     transform: translate3d(10px, 10px, 0);
     position: absolute;
-    z-index: 9;
+    z-index: 1;
     width: 500px;
     height: auto;
     background-color: #F2F1F0;
@@ -20,8 +20,10 @@ template.innerHTML = `
     user-select: none;
   }
 
-  .app-dragging {
-    background: rgba(255, 255, 255, 0.7);
+  .app-active {
+    color: #DAD8D1 !important;
+    background: rgba(255, 255, 255, 0.7) !important;
+    z-index: 1;
   }
 
   .app-header {
@@ -97,6 +99,9 @@ template.innerHTML = `
     <div class="app-header">
       <img class="app-icon">
       <h5 class="app-title">Modal title</h5>
+      <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     <div class="app-body"></div>
     <div class="app-footer">
