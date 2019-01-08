@@ -74,7 +74,6 @@ export class Window extends window.HTMLElement {
           this.currentY = event.clientY - this.initialY
         }
 
-        let style = 'top:' + this.currentY + 'px;' + 'left:' + this.currentX + 'px;'
         let style2 = 'transform: translate3d(' + this.currentX + 'px, ' + this.currentY + 'px, 0)'
         this.app.setAttribute('style', style2)
       }

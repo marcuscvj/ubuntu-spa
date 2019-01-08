@@ -9,7 +9,6 @@ template.innerHTML = `
     z-index: 9;
     width: 500px;
     height: auto;
-    min-height: 300px;
     background-color: #F2F1F0;
     border: 1px solid black;
     border-radius: .25rem;
@@ -22,7 +21,7 @@ template.innerHTML = `
   }
 
   #app:active {
-    background-color: rgba(168, 218, 220, 1.00);
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
   .app-header {
@@ -33,9 +32,33 @@ template.innerHTML = `
     border-top-right-radius: 0;
   }
 
+  .app-body {
+    font-size: 0.9rem;
+    background-color: #F2F1F0;
+    border-radius: .25rem;
+    -webkit-box-shadow:  10px 10px 50px 1px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow:     10px 10px 50px 1px rgba(0, 0, 0, 0.7);
+    box-shadow:          10px 10px 50px 1px rgba(0, 0, 0, 0.7);
+  }
+  
+  .app-title {
+    font-family: ubuntubold;
+    font-size: 1rem;
+  }
+
+  .app-footer {
+    padding: 0.5rem;
+    border-top: none;
+  }
+
+  .app-icon {
+    width: 24px;
+    height: auto;
+    margin-right: 10px;
+  }
+
   #app:hover {
     cursor: pointer;
-    border-width: 2px;
   }
 
   .close {
