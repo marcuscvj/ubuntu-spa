@@ -20,10 +20,6 @@ template.innerHTML = `
     user-select: none;
   }
 
-  #app:active {
-    background-color: rgba(255, 255, 255, 0.7);
-  }
-
   .app-header {
     padding: 0.2rem 1rem;
     background: linear-gradient(#616155 , #483C3C);
@@ -42,16 +38,20 @@ template.innerHTML = `
   }
   
   .app-title {
+    display: inline-block;
     font-family: ubuntubold;
     font-size: 1rem;
+    line-height: 0.7;
   }
 
   .app-footer {
     padding: 0.5rem;
     border-top: none;
+    float: right;
   }
 
   .app-icon {
+    display: inline-block;
     width: 24px;
     height: auto;
     margin-right: 10px;

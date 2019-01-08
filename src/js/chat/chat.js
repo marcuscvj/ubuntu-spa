@@ -4,8 +4,8 @@ import { userInputForm, messageForm } from './template.js'
 export class Chat extends Window {
   constructor () {
     super()
-    this.modalIcon.setAttribute('src', '/image/nav/chat.png')
-    this.modalIcon.setAttribute('alt', 'Chat')
+    this.appIcon.setAttribute('src', '/image/nav/chat.png')
+    this.appIcon.setAttribute('alt', 'Chat')
     this.channel = undefined
     this.url = 'ws://vhost3.lnu.se:20080/socket/'
 

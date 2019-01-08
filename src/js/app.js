@@ -9,7 +9,7 @@ let time = document.querySelector('#display-current-time')
 
 // displayCurrentTime(time)
 
-/* apps.addEventListener('click', event => {
+apps.addEventListener('click', event => {
   if (event.target.alt === 'chat') {
     let chat = document.createElement('chat-form')
     chat.setAttribute('title', 'Chat X')
@@ -23,12 +23,12 @@ let time = document.querySelector('#display-current-time')
     memory.setAttribute('title', 'Memory Game')
     document.querySelector('#surface').appendChild(memory)
   }
-}) */
+})
 
-apps.addEventListener('click', event => {
+/* apps.addEventListener('click', event => {
   if (event.target.alt === 'chat') {
     let window = document.createElement('window-form')
     window.setAttribute('title', 'Window Test')
     document.querySelector('#surface').appendChild(window)
   }
-})
+}) */

@@ -4,8 +4,8 @@ import template from './template.js'
 export class Clock extends Window {
   constructor () {
     super()
-    this.modalIcon.setAttribute('src', '/image/nav/clock.png')
-    this.modalIcon.setAttribute('alt', 'Clock')
+    this.appIcon.setAttribute('src', '/image/nav/clock.png')
+    this.appIcon.setAttribute('alt', 'Clock')
     this.modalBody.appendChild(template.content.cloneNode(true))
 
     this.runStopwatch = true

@@ -4,8 +4,8 @@ import template from './template.js'
 export class Memory extends Window {
   constructor () {
     super()
-    this.modalIcon.setAttribute('src', '/image/nav/memory.png')
-    this.modalIcon.setAttribute('alt', 'Memory')
+    this.appIcon.setAttribute('src', '/image/nav/memory.png')
+    this.appIcon.setAttribute('alt', 'Memory')
     this.modalBody.appendChild(template.content.cloneNode(true))
     this.resultsDiv = this.modalBody.querySelector('#results')
     this.resultsDiv.setAttribute('class', 'alert alert-light')
