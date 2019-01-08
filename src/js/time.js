@@ -1,9 +1,14 @@
 export default function displayCurrentTime (element) {
-  let d = new Date()
-  element.innerHTML = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
-
   setInterval(() => {
     let d = new Date()
-    element.innerHTML = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+    element.innerHTML = checkTime(d.getHours()) + ':' + checkTime(d.getMinutes()) + ':' + checkTime(d.getSeconds())
   }, 1000)
+}
+
+function checkTime (i) {
+  if (i < 10) {
+    i = '0' + i
+  }
+
+  return i
 }

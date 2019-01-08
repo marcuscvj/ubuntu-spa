@@ -6,15 +6,18 @@ export class Window extends window.HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
     this.titleText = 'Window Object'
-    this.modal = this.shadowRoot.querySelector('#modal-dialog')
-    this.modalHeader = this.shadowRoot.querySelector('#modal-header')
-    this.modalTitle = this.shadowRoot.querySelector('#title')
-    this.modalBody = this.shadowRoot.querySelector('#body')
-    this.modalCloseBtn = this.shadowRoot.querySelector('#modal-close')
-    this.modalFooterCloseBtn = this.shadowRoot.querySelector('#modal-footer-close-btn')
-    this.modalIcon = this.shadowRoot.querySelector('#modal-icon')
+    this.app = this.shadowRoot.querySelector('#app')
+    this.appContent = this.shadowRoot.querySelector('#app .app-container')
+    this.appHeader = this.shadowRoot.querySelector('#app .app-container .app-header')
+    this.appTitle = this.shadowRoot.querySelector('#app .app-container .app-header .app-title')
+    this.appBody = this.shadowRoot.querySelector('#app .app-container .app-body')
+    this.appFooterCloseBtn = this.shadowRoot.querySelector('#app .app-container .app-footer .app-close-btn')
+    this.appIcon = this.shadowRoot.querySelector('#app .app-container .app-header .app-icon')
 
-    // this.modal.style.top += 5 increase the top value for the divs when created
+    console.log(this.appIcon)
+    console.log(this.appHeader)
+
+    // this.app.style.top += 5 increase the top value for the divs when created
 
     this.surface = document.querySelector('#surface')
     this.active = false
@@ -31,23 +34,20 @@ export class Window extends window.HTMLElement {
   }
 
   connectedCallback () {
-    this.modalTitle.textContent = this.titleText
+    this.appTitle.textContent = this.titleText
+    this.app.setAttribute('aria-grabbed', 'false')
 
-    this.modalCloseBtn.addEventListener('click', event => {
-      this.setAttribute('hidden', '')
-    })
-
-    this.modalFooterCloseBtn.addEventListener('click', event => {
+    this.appFooterCloseBtn.addEventListener('click', event => {
       this.setAttribute('hidden', '')
     })
 
     // Used to make the window move
-    this.addEventListener('touchstart', this.dragStart, false)
-    this.addEventListener('touchend', this.dragEnd, false)
-    this.addEventListener('touchmove', this.drag, false)
-    this.addEventListener('mousedown', this.dragStart, false)
-    this.addEventListener('mouseup', this.dragEnd, false)
-    this.addEventListener('mousemove', this.drag, false)
+    this.app.addEventListener('touchstart', this.dragStart, false)
+    this.app.addEventListener('touchend', this.dragEnd, false)
+    this.app.addEventListener('touchmove', this.drag, false)
+    this.app.addEventListener('mousedown', this.dragStart, false)
+    this.app.addEventListener('mouseup', this.dragEnd, false)
+    this.app.addEventListener('mousemove', this.drag, false)
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -57,10 +57,12 @@ export class Window extends window.HTMLElement {
   }
 
   clearWindow () {
-    this.modalBody.innerHTML = ''
+    this.appBody.innerHTML = ''
   }
 
   dragStart (event) {
+    event.target.setAttribute('aria-grabbed', 'true')
+    // this.appHeader.classList.add('modal-on-top')
     if (event.type === 'touchstart') {
       event.preventDefault()
       this.initialX = event.clientX - this.offsetX
@@ -70,7 +72,7 @@ export class Window extends window.HTMLElement {
       this.initialY = event.clientY - this.offsetY
     }
 
-    if (event.target === this) {
+    if (event.target === this.app) {
       this.active = true
     }
   }
@@ -80,12 +82,14 @@ export class Window extends window.HTMLElement {
     this.initialX = this.currentX
     this.initialY = this.currentY
 
+    event.target.setAttribute('aria-grabbed', 'false')
+    // this.appHeader.classList.remove('modal-on-top')
     this.active = false
   }
 
   drag (event) {
-    event.preventDefault()
     if (this.active) {
+      event.preventDefault()
       if (event.type === 'touchmove') {
         this.currentX = event.clientX
         this.currentY = event.clientY
@@ -95,7 +99,7 @@ export class Window extends window.HTMLElement {
       }
 
       let style = 'left:' + this.currentX + 'px;' + 'top:' + this.currentY + 'px;'
-      this.modal.setAttribute('style', style)
+      this.app.setAttribute('style', style)
     }
   }
 }
