@@ -40,7 +40,7 @@ export class Window extends window.HTMLElement {
       this.setAttribute('hidden', '')
     })
 
-    this.container.addEventListener('mousedown', event => {
+    this.app.addEventListener('mousedown', event => {
       if (event.type === 'touchstart') {
         this.initialX = event.touches[0].clientX - this.offsetX
         this.initialY = event.touches[0].clientY - this.offsetY
@@ -54,14 +54,14 @@ export class Window extends window.HTMLElement {
       }
     })
 
-    this.container.addEventListener('mouseup', event => {
+    this.app.addEventListener('mouseup', event => {
       console.log(event.type)
       this.initialX = this.currentX
       this.initialY = this.currentY
       this.active = false
     })
 
-    this.container.addEventListener('mousemove', event => {
+    this.app.addEventListener('mousemove', event => {
       if (this.active) {
         event.preventDefault()
         console.log(event.type)

@@ -3,20 +3,8 @@ template.innerHTML = `
 <style>
 @import url('../../css/bootstrap.min.css');
 
-
-  #container {
-    width: 100%;
-    height: 100%;
-    background-color: #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 7px;
-    touch-action: none;
-  }
-
   #app {
+    transform: translate3d(10px, 10px, 0);
     position: absolute;
     z-index: 9;
     width: 500px;
@@ -37,9 +25,17 @@ template.innerHTML = `
     background-color: rgba(168, 218, 220, 1.00);
   }
 
+  .app-header {
+    padding: 0.2rem 1rem;
+    background: linear-gradient(#616155 , #483C3C);
+    color: #DAD8D1;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
   #app:hover {
     cursor: pointer;
-    border-width: 20px;
+    border-width: 2px;
   }
 
   .close {
@@ -72,7 +68,6 @@ template.innerHTML = `
   }
 </style>
 
-<div id="container">
 <div id="app">
   <div class="app-container">
     <div class="app-header">
@@ -84,7 +79,6 @@ template.innerHTML = `
       <button type="button" class="btn btn-light app-close-btn" data-dismiss="modal">Close</button>
     </div>
   </div>
-</div>
 </div>
 `
 
