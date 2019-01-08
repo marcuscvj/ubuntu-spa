@@ -7,7 +7,7 @@ import displayCurrentTime from './time.js'
 let apps = document.querySelector('#apps')
 let time = document.querySelector('#display-current-time')
 
-displayCurrentTime(time)
+// displayCurrentTime(time)
 
 /* apps.addEventListener('click', event => {
   if (event.target.alt === 'chat') {

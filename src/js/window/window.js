@@ -6,20 +6,20 @@ export class Window extends window.HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
     this.titleText = 'Window Object'
+    this.container = this.shadowRoot.querySelector('#container')
     this.app = this.shadowRoot.querySelector('#app')
-    this.appContent = this.shadowRoot.querySelector('#app .app-container')
-    this.appHeader = this.shadowRoot.querySelector('#app .app-container .app-header')
-    this.appTitle = this.shadowRoot.querySelector('#app .app-container .app-header .app-title')
-    this.appBody = this.shadowRoot.querySelector('#app .app-container .app-body')
-    this.appFooterCloseBtn = this.shadowRoot.querySelector('#app .app-container .app-footer .app-close-btn')
-    this.appIcon = this.shadowRoot.querySelector('#app .app-container .app-header .app-icon')
+    this.appContent = this.shadowRoot.querySelector('.app-container')
+    this.appHeader = this.shadowRoot.querySelector('.app-header')
+    this.appTitle = this.shadowRoot.querySelector('.app-title')
+    this.appBody = this.shadowRoot.querySelector('.app-body')
+    this.appFooterCloseBtn = this.shadowRoot.querySelector('.app-close-btn')
+    this.appIcon = this.shadowRoot.querySelector('.app-icon')
 
-    console.log(this.appIcon)
-    console.log(this.appHeader)
+    // console.log(this.app)
+    // console.log(this.appHeader)
 
     // this.app.style.top += 5 increase the top value for the divs when created
 
-    this.surface = document.querySelector('#surface')
     this.active = false
     this.currentX = undefined
     this.currentY = undefined
@@ -35,19 +35,50 @@ export class Window extends window.HTMLElement {
 
   connectedCallback () {
     this.appTitle.textContent = this.titleText
-    this.app.setAttribute('aria-grabbed', 'false')
 
     this.appFooterCloseBtn.addEventListener('click', event => {
       this.setAttribute('hidden', '')
     })
 
-    // Used to make the window move
-    this.app.addEventListener('touchstart', this.dragStart, false)
-    this.app.addEventListener('touchend', this.dragEnd, false)
-    this.app.addEventListener('touchmove', this.drag, false)
-    this.app.addEventListener('mousedown', this.dragStart, false)
-    this.app.addEventListener('mouseup', this.dragEnd, false)
-    this.app.addEventListener('mousemove', this.drag, false)
+    this.container.addEventListener('mousedown', event => {
+      if (event.type === 'touchstart') {
+        this.initialX = event.touches[0].clientX - this.offsetX
+        this.initialY = event.touches[0].clientY - this.offsetY
+      } else {
+        this.initialX = event.clientX - this.offsetX
+        this.initialY = event.clientY - this.offsetY
+      }
+
+      if (event.target === this.appHeader) {
+        this.active = true
+      }
+    })
+
+    this.container.addEventListener('mouseup', event => {
+      console.log(event.type)
+      this.initialX = this.currentX
+      this.initialY = this.currentY
+      this.active = false
+    })
+
+    this.container.addEventListener('mousemove', event => {
+      if (this.active) {
+        event.preventDefault()
+        console.log(event.type)
+        
+        if (event.type === 'touchmove') {
+          this.initialX = event.touches[0].clientX - this.offsetX
+          this.initialY = event.touches[0].clientY - this.offsetY
+        } else {
+          this.currentX = event.clientX - this.initialX
+          this.currentY = event.clientY - this.initialY
+        }
+
+        let style = 'top:' + this.currentY + 'px;' + 'left:' + this.currentX + 'px;'
+        let style2 = 'transform: translate3d(' + this.currentX + 'px, ' + this.currentY + 'px, 0)'
+        this.app.setAttribute('style', style2)
+      }
+    })
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -58,49 +89,6 @@ export class Window extends window.HTMLElement {
 
   clearWindow () {
     this.appBody.innerHTML = ''
-  }
-
-  dragStart (event) {
-    event.target.setAttribute('aria-grabbed', 'true')
-    // this.appHeader.classList.add('modal-on-top')
-    if (event.type === 'touchstart') {
-      event.preventDefault()
-      this.initialX = event.clientX - this.offsetX
-      this.initialY = event.clientY - this.offsetY
-    } else {
-      this.initialX = event.clientX - this.offsetX
-      this.initialY = event.clientY - this.offsetY
-    }
-
-    if (event.target === this.app) {
-      this.active = true
-    }
-  }
-
-  dragEnd (event) {
-    event.preventDefault()
-    this.initialX = this.currentX
-    this.initialY = this.currentY
-
-    event.target.setAttribute('aria-grabbed', 'false')
-    // this.appHeader.classList.remove('modal-on-top')
-    this.active = false
-  }
-
-  drag (event) {
-    if (this.active) {
-      event.preventDefault()
-      if (event.type === 'touchmove') {
-        this.currentX = event.clientX
-        this.currentY = event.clientY
-      } else {
-        this.currentX = event.clientX
-        this.currentY = event.clientY
-      }
-
-      let style = 'left:' + this.currentX + 'px;' + 'top:' + this.currentY + 'px;'
-      this.app.setAttribute('style', style)
-    }
   }
 }
 

@@ -1,20 +1,45 @@
 const template = document.createElement('template')
 template.innerHTML = `
 <style>
-  @import url('../../css/bootstrap.min.css');
+@import url('../../css/bootstrap.min.css');
+
+
+  #container {
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 7px;
+    touch-action: none;
+  }
 
   #app {
-    cursor: move;
+    position: absolute;
+    z-index: 9;
     width: 500px;
     height: auto;
+    min-height: 300px;
     background-color: #F2F1F0;
     border: 1px solid black;
     border-radius: .25rem;
-    margin: 2px;
     float: left;
     -webkit-box-shadow:  10px 10px 50px 1px rgba(0, 0, 0, 0.7);
     -moz-box-shadow:     10px 10px 50px 1px rgba(0, 0, 0, 0.7);
     box-shadow:          10px 10px 50px 1px rgba(0, 0, 0, 0.7);
+    touch-action: none;
+    user-select: none;
+  }
+
+  #app:active {
+    background-color: rgba(168, 218, 220, 1.00);
+  }
+
+  #app:hover {
+    cursor: pointer;
+    border-width: 20px;
   }
 
   .close {
@@ -47,7 +72,7 @@ template.innerHTML = `
   }
 </style>
 
-
+<div id="container">
 <div id="app">
   <div class="app-container">
     <div class="app-header">
@@ -60,7 +85,7 @@ template.innerHTML = `
     </div>
   </div>
 </div>
-
+</div>
 `
 
 export default template
