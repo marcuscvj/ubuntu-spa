@@ -11,11 +11,11 @@ export class Chat extends Window {
 
     // if chat-form does not exists in DOM
     if (!document.querySelector('chat-form')) {
-      this.modalBody.appendChild(userInputForm.content.cloneNode(true))
+      this.appBody.appendChild(userInputForm.content.cloneNode(true))
     } else if (window.localStorage.getItem('user')) {
-      this.modalBody.appendChild(messageForm.content.cloneNode(true))
+      this.appBody.appendChild(messageForm.content.cloneNode(true))
     } else {
-      this.modalBody.appendChild(userInputForm.content.cloneNode(true))
+      this.appBody.appendChild(userInputForm.content.cloneNode(true))
     }
 
     const socket = new WebSocket(this.url)
@@ -25,11 +25,11 @@ export class Chat extends Window {
 
       if (msg.type === 'message' && msg.channel === this.channel) {
         let str = msg.username + ': ' + msg.data + '&#010;'
-        this.modalBody.querySelector('textarea').innerHTML += str
+        this.appBody.querySelector('textarea').innerHTML += str
       }
     })
 
-    this.modalBody.addEventListener('input', event => {
+    this.appBody.addEventListener('input', event => {
       event.preventDefault()
 
       if (event.target.name === 'channel') {
@@ -37,7 +37,7 @@ export class Chat extends Window {
       }
     })
 
-    this.modalBody.addEventListener('submit', event => {
+    this.appBody.addEventListener('submit', event => {
       event.preventDefault()
 
       if (event.target.id === 'username-form') {
@@ -45,7 +45,7 @@ export class Chat extends Window {
         window.localStorage.setItem('user', JSON.stringify({ username: user }))
 
         this.clearWindow()
-        this.modalBody.appendChild(messageForm.content.cloneNode(true))
+        this.appBody.appendChild(messageForm.content.cloneNode(true))
       } else {
         let msg = event.target.message.value
         let user = JSON.parse(window.localStorage.getItem('user'))
@@ -59,16 +59,16 @@ export class Chat extends Window {
         }
 
         socket.send(JSON.stringify(sendObj))
-        this.modalBody.querySelector('#message').value = ''
+        this.appBody.querySelector('#message').value = ''
       }
     })
 
     // Event listeners to close the socket when the user closes the window
-    this.modalCloseBtn.addEventListener('click', event => {
+    /*  this.modalCloseBtn.addEventListener('click', event => {
       socket.close()
-    })
+    }) */
 
-    this.modalFooterCloseBtn.addEventListener('click', event => {
+    this.appFooterCloseBtn.addEventListener('click', event => {
       socket.close()
     })
   }

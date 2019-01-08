@@ -64,7 +64,7 @@ export class Window extends window.HTMLElement {
     this.app.addEventListener('mousemove', event => {
       if (this.active) {
         event.preventDefault()
-        console.log(event.type)
+        this.app.classList.add('app-dragging')
         
         if (event.type === 'touchmove') {
           this.initialX = event.touches[0].clientX - this.offsetX
@@ -74,8 +74,10 @@ export class Window extends window.HTMLElement {
           this.currentY = event.clientY - this.initialY
         }
 
-        let style2 = 'transform: translate3d(' + this.currentX + 'px, ' + this.currentY + 'px, 0)'
-        this.app.setAttribute('style', style2)
+        if (this.currentX > 0 && this.currentY > 0) {
+          let style2 = 'transform: translate3d(' + this.currentX + 'px, ' + this.currentY + 'px, 0)'
+          this.app.setAttribute('style', style2)
+        }
       }
     })
   }

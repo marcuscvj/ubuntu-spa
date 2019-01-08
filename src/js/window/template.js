@@ -10,7 +10,7 @@ template.innerHTML = `
     width: 500px;
     height: auto;
     background-color: #F2F1F0;
-    border: 1px solid black;
+    border: 1px solid #772c2c;
     border-radius: .25rem;
     float: left;
     -webkit-box-shadow:  10px 10px 50px 1px rgba(0, 0, 0, 0.7);
@@ -18,6 +18,10 @@ template.innerHTML = `
     box-shadow:          10px 10px 50px 1px rgba(0, 0, 0, 0.7);
     touch-action: none;
     user-select: none;
+  }
+
+  .app-dragging {
+    background: rgba(255, 255, 255, 0.7);
   }
 
   .app-header {
@@ -31,10 +35,7 @@ template.innerHTML = `
   .app-body {
     font-size: 0.9rem;
     background-color: #F2F1F0;
-    border-radius: .25rem;
-    -webkit-box-shadow:  10px 10px 50px 1px rgba(0, 0, 0, 0.7);
-    -moz-box-shadow:     10px 10px 50px 1px rgba(0, 0, 0, 0.7);
-    box-shadow:          10px 10px 50px 1px rgba(0, 0, 0, 0.7);
+    margin: 1em;
   }
   
   .app-title {

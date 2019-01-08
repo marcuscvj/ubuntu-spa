@@ -1,7 +1,7 @@
 import { Window } from './window/window.js'
-// import { Chat } from './chat/chat.js'
-// import { Clock } from './clock/clock.js'
-// import { Memory } from './memory/memory.js'
+import { Chat } from './chat/chat.js'
+import { Clock } from './clock/clock.js'
+import { Memory } from './memory/memory.js'
 import displayCurrentTime from './time.js'
 
 let apps = document.querySelector('#apps')
