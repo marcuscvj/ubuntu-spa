@@ -50,9 +50,10 @@ export class Chat extends Window {
         let user = event.target.username.value
         window.localStorage.setItem('user', JSON.stringify({ username: user }))
 
-        this.clearWindow()
-        this.querySelector('#username-form').hidden = true
-        this.querySelector('#message-form').hidden = false
+        // this.clearWindow()
+        this.appBody.querySelector('#username-form').hidden = true
+        this.appBody.querySelector('#message-form').hidden = false
+        this.appBody.querySelector('.nav').hidden = false
       } else if (event.target.id === 'message-form') {
         if (event.target.message.value !== undefined) {
           let msg = event.target.message.value
