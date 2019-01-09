@@ -69,7 +69,7 @@ export class Chat extends Window {
 
         this.clearWindow()
         this.appBody.appendChild(messageForm.content.cloneNode(true))
-      } else {
+      } else if (event.target.id === 'message-form') {
         if (event.target.message.value !== undefined) {
           let msg = event.target.message.value
           let user = JSON.parse(window.localStorage.getItem('user'))
