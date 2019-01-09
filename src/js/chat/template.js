@@ -49,6 +49,7 @@ messageForm.innerHTML = `
   .messages {
     padding: 0.3rem 0.3rem 0.5rem 0.5rem;
     min-height: 200px;
+    max-height: 300px;
     width: 100%;
     border: 1px solid #ced4da;
     border-radius: .25rem;
@@ -56,13 +57,19 @@ messageForm.innerHTML = `
     color: #5c5063;
     font-size: 1rem;
     background-color: #fff;
+    overflow-y: scroll;
+  }
+  
+  .message {
+    border-bottom: 1px solid #e4e4e4;
+    padding: 0.5rem 0 0.5rem 0;
   }
 
   #message-time { 
     font-size: 70%;
     font-style: italic;
     margin-left: 0.5rem;
-    opacity: 0.5;
+    color: #c3c3c3;
   }
 </style>
 <ul class="nav">
@@ -74,7 +81,7 @@ messageForm.innerHTML = `
   </li>
 </ul>
 
-<form id="new-username" hidden>
+<form id="new-username" autocomplete="off" hidden>
   <div class="form-row align-items-center">
     <div class="col-sm-10">
       <div class="input-group">

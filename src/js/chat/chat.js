@@ -25,7 +25,7 @@ export class Chat extends Window {
 
       if (msg.type === 'message' && msg.channel === this.channel) {
         let time = '<span id="message-time">' + this.getDate() + '</span>'
-        let str = '<b>' + msg.username + ':</b> ' + msg.data + ' ' + time + '<br>'
+        let str = '<div class="message"><b>' + msg.username + ':</b> ' + msg.data + ' ' + time + '</div>'
         this.appBody.querySelector('.messages').innerHTML += str
       }
     })
@@ -47,7 +47,9 @@ export class Chat extends Window {
 
       if (event.target.id === 'new-username') {
         let user = event.target.username.value
-        window.localStorage.setItem('user', JSON.stringify({ username: user }))
+        if (user !== '') {
+          window.localStorage.setItem('user', JSON.stringify({ username: user }))
+        }
         this.newUsername.hidden = true
       }
     })
