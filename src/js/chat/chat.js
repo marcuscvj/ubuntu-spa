@@ -22,11 +22,11 @@ export class Chat extends Window {
 
     socket.addEventListener('message', event => {
       let msg = JSON.parse(event.data)
-      console.log(msg)
 
       if (msg.type === 'message' && msg.channel === this.channel) {
-        let str = msg.username + ': ' + msg.data + '&#010;'
-        this.appBody.querySelector('textarea').innerHTML += str
+        let time = '<span id="message-time">' + this.getDate() + '</span>'
+        let str = '<b>' + msg.username + ':</b> ' + msg.data + ' ' + time + '<br>'
+        this.appBody.querySelector('.messages').innerHTML += str
       }
     })
 
@@ -89,13 +89,32 @@ export class Chat extends Window {
     })
 
     // Event listeners to close the socket when the user closes the window
-    /*  this.modalCloseBtn.addEventListener('click', event => {
+    this.appHeaderCloseBtn.addEventListener('click', event => {
       socket.close()
-    }) */
+    })
 
     this.appFooterCloseBtn.addEventListener('click', event => {
       socket.close()
     })
+  }
+
+  getDate () {
+    let d = new Date()
+
+    function formatDate (i) {
+      if (i < 10) {
+        i = '0' + i
+      }
+      return i
+    }
+
+    let str = (
+      d.getFullYear() + '-' + formatDate(d.getMonth() + 1) + '-' +
+      formatDate(d.getDate()) + ' ' + formatDate(d.getHours()) +
+      ':' + formatDate(d.getMinutes()) + ':' + formatDate(d.getSeconds())
+    )
+
+    return str
   }
 }
 

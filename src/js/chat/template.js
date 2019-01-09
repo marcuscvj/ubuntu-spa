@@ -45,6 +45,25 @@ messageForm.innerHTML = `
   #new-username {
     margin-bottom: 1rem;
   }
+
+  .messages {
+    padding: 0.3rem 0.3rem 0.5rem 0.5rem;
+    min-height: 200px;
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #5c5063;
+    font-size: 1rem;
+    background-color: #fff;
+  }
+
+  #message-time { 
+    font-size: 70%;
+    font-style: italic;
+    margin-left: 0.5rem;
+    opacity: 0.5;
+  }
 </style>
 <ul class="nav">
   <li class="nav-item">
@@ -82,7 +101,7 @@ messageForm.innerHTML = `
 
 <form id="message-form" autocomplete="off">
   <div class="form-group">
-    <textarea class="form-control" rows="8" readonly></textarea>
+    <div class="messages"></div>
   </div>
   <div class="form-group">
     <textarea id="message" class="form-control" name="message" rows="2" placeholder="Send a message"></textarea>
