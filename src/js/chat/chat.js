@@ -15,6 +15,14 @@ export class Chat extends Window {
     this.newUsername = this.appBody.querySelector('#new-username')
     this.chatSettings = this.appBody.querySelector('#settings')
 
+    if (window.localStorage.getItem('settings')) {
+      let settings = JSON.parse(window.localStorage.getItem('settings'))
+      if (settings.theme === 'dark-theme') {
+        this.app.appendChild(settingsStyle.content.cloneNode(true))
+        this.appBody.querySelector('#dark-theme').checked = true
+      }
+    }
+
     if (!window.localStorage.getItem('user')) {
       this.appBody.querySelector('#username-form').hidden = false
     } else {
@@ -27,6 +35,10 @@ export class Chat extends Window {
 
     socket.addEventListener('message', event => {
       let msg = JSON.parse(event.data)
+
+      if (msg.username === '') {
+        msg.username = 'Anonymous'
+      }
 
       if (msg.type === 'message' && msg.channel === this.channel) {
         let time = '<span id="message-time">' + this.getDate() + '</span>'
@@ -50,7 +62,6 @@ export class Chat extends Window {
         let user = event.target.username.value
         window.localStorage.setItem('user', JSON.stringify({ username: user }))
 
-        // this.clearWindow()
         this.appBody.querySelector('#username-form').hidden = true
         this.appBody.querySelector('#message-form').hidden = false
         this.appBody.querySelector('.nav').hidden = false
@@ -75,6 +86,8 @@ export class Chat extends Window {
 
     this.chatSettings.addEventListener('change', event => {
       if (event.target.checked) {
+        let theme = 'dark-theme'
+        window.localStorage.setItem('settings', JSON.stringify({ theme: theme }))
         this.app.appendChild(settingsStyle.content.cloneNode(true))
       } else {
         let appDiv = this.shadowRoot.querySelector('#app')

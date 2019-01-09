@@ -1,6 +1,6 @@
 const template = document.createElement('template')
 template.innerHTML = `
-<form id="username-form" autocomplete="off" hidden>
+<form id="username-form" autocomplete="off">
   <div class="form-group">
     <label for="inputUsername">Username</label>
     <input type="text" class="form-control" id="inputUsername" name="username" aria-describedby="usernameHelp" placeholder="Enter username">
