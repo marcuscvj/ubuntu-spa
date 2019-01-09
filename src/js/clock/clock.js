@@ -1,7 +1,26 @@
+/**
+ * Clock module.
+ *
+ * @module src/js/clock/clock
+ * @author Marcus Cvjeticanin
+ * @version 1.0
+ */
+
 import { Window } from '../window/window.js'
 import template from './template.js'
 
+/**
+ * A Memory application that inherits from Window.
+ *
+ * @class Memory
+ * @extends {Window}
+ */
 export class Clock extends Window {
+  /**
+   * Creates an instance of Memory.
+   *
+   * @memberof Memory
+   */
   constructor () {
     super()
     this.appIcon.setAttribute('src', '/image/nav/clock.png')
@@ -63,6 +82,11 @@ export class Clock extends Window {
     })
   }
 
+  /**
+   * A stopwatch method.
+   *
+   * @memberof Clock
+   */
   stopwatch () {
     let seconds = 0
 
@@ -77,6 +101,11 @@ export class Clock extends Window {
     }, 1000)
   }
 
+  /**
+   * A timer method.
+   *
+   * @memberof Clock
+   */
   timer (hours, minutes, seconds) {
     let hoursToSeconds = hours * 60 * 60
     let minutesToSeconds = minutes * 60
@@ -96,6 +125,13 @@ export class Clock extends Window {
     }, 1000)
   }
 
+  /**
+   * Returns the current time in format
+   * HH:MM:SS
+   *
+   * @memberof Clock
+   * @returns {String}
+   */
   displayTime (seconds) {
     let h = Math.floor(seconds / 3600) % 24
     let m = Math.floor(seconds / 60) % 60
@@ -105,6 +141,13 @@ export class Clock extends Window {
     return time
   }
 
+  /**
+   * Checks if the time is less than 10
+   * and adds a zero if it's false
+   *
+   * @memberof Clock
+   * @returns {String}
+   */
   checkTime (i) {
     if (i < 10) {
       i = '0' + i

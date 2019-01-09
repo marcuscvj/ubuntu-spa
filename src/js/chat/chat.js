@@ -36,9 +36,20 @@ export class Chat extends Window {
 
     if (window.localStorage.getItem('settings')) {
       let settings = JSON.parse(window.localStorage.getItem('settings'))
+    
       if (settings.theme === 'dark-theme') {
         this.app.appendChild(settingsStyle.content.cloneNode(true))
         this.appBody.querySelector('#dark-theme').checked = true
+      } else if (settings.theme === 'light-theme') {
+        this.appBody.querySelector('#dark-theme').checked = false
+        let appDiv = this.shadowRoot.querySelector('#app')
+        let styles = appDiv.querySelectorAll('style')
+
+        for (let i = 0; i < styles.length; i++) {
+          styles[i].remove()
+        }
+
+        this.appBody.appendChild(defaultStyle.content.cloneNode(true))
       }
     }
 
@@ -109,6 +120,9 @@ export class Chat extends Window {
         window.localStorage.setItem('settings', JSON.stringify({ theme: theme }))
         this.app.appendChild(settingsStyle.content.cloneNode(true))
       } else {
+        let theme = 'light-theme'
+        window.localStorage.setItem('settings', JSON.stringify({ theme: theme }))
+   
         let appDiv = this.shadowRoot.querySelector('#app')
         let styles = appDiv.querySelectorAll('style')
 
