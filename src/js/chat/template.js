@@ -16,8 +16,9 @@ messageForm.innerHTML = `
   .form-control {
     overflow-y: scroll;
   }
+  
   .nav {
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
   }
   
   .nav a {
@@ -71,6 +72,10 @@ messageForm.innerHTML = `
     margin-left: 0.5rem;
     color: #c3c3c3;
   }
+
+  #settings {
+    margin-bottom: 1rem;
+  }
 </style>
 <ul class="nav">
   <li class="nav-item">
@@ -79,7 +84,17 @@ messageForm.innerHTML = `
   <li class="nav-item">
     <a id="change-channel" class="nav-link" href="#">Channel</a>
   </li>
+  <li class="nav-item">
+    <a id="chat-settings" class="nav-link" href="#">Settings</a>
+  </li>
 </ul>
+
+<div id="settings" hidden>
+  <div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" id="dark-theme">
+    <label class="custom-control-label" for="dark-theme">Use dark theme</label>
+  </div>
+</div>
 
 <form id="new-username" autocomplete="off" hidden>
   <div class="form-row align-items-center">
@@ -117,4 +132,23 @@ messageForm.innerHTML = `
 </form>
 `
 
-export { userInputForm, messageForm }
+const settingsStyle = document.createElement('template')
+settingsStyle.innerHTML = `
+<style>
+.messages {
+  background-color: #212121;
+  color: #ccc;
+}
+
+.message {
+  border-bottom: 1px solid #404040;
+  color: #ccc;
+}
+
+#message-time {
+  color: #636363;
+}
+</style>
+`
+
+export { userInputForm, messageForm, settingsStyle }

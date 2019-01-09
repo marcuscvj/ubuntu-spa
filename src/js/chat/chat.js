@@ -1,5 +1,5 @@
 import { Window } from '../window/window.js'
-import { userInputForm, messageForm } from './template.js'
+import { userInputForm, messageForm, settingsStyle } from './template.js'
 
 export class Chat extends Window {
   constructor () {
@@ -19,6 +19,7 @@ export class Chat extends Window {
     this.navigation = this.appBody.querySelector('.nav')
     this.selectChannel = this.appBody.querySelector('#select-channel')
     this.newUsername = this.appBody.querySelector('#new-username')
+    this.chatSettings = this.appBody.querySelector('#settings')
 
     socket.addEventListener('message', event => {
       let msg = JSON.parse(event.data)
@@ -34,11 +35,27 @@ export class Chat extends Window {
       event.preventDefault()
 
       if (event.target.id === 'change-channel') {
+        this.chatSettings.hidden = true
         this.newUsername.hidden = true
         this.selectChannel.hidden = false
       } else if (event.target.id === 'change-username') {
+        this.chatSettings.hidden = true
         this.selectChannel.hidden = true
         this.newUsername.hidden = false
+      } else if (event.target.id === 'chat-settings') {
+        this.selectChannel.hidden = true
+        this.newUsername.hidden = true
+        this.chatSettings.hidden = false
+        console.log('testing')
+      }
+    })
+
+    this.chatSettings.addEventListener('change', event => {
+      if (event.target.checked) {
+        this.app.appendChild(settingsStyle.content.cloneNode(true))
+        console.log('checked!')
+      } else {
+        console.log('unchecked')
       }
     })
 
