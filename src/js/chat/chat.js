@@ -44,12 +44,11 @@ export class Chat extends Window {
 
     this.newUsername.addEventListener('submit', event => {
       event.preventDefault()
-      console.log(event.target)
 
       if (event.target.id === 'new-username') {
         let user = event.target.username.value
-        console.log(user)
         window.localStorage.setItem('user', JSON.stringify({ username: user }))
+        this.newUsername.hidden = true
       }
     })
 
@@ -71,19 +70,21 @@ export class Chat extends Window {
         this.clearWindow()
         this.appBody.appendChild(messageForm.content.cloneNode(true))
       } else {
-        let msg = event.target.message.value
-        let user = JSON.parse(window.localStorage.getItem('user'))
+        if (event.target.message.value !== undefined) {
+          let msg = event.target.message.value
+          let user = JSON.parse(window.localStorage.getItem('user'))
 
-        let sendObj = {
-          type: 'message',
-          data: msg,
-          username: user.username,
-          channel: this.channel,
-          key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
+          let sendObj = {
+            type: 'message',
+            data: msg,
+            username: user.username,
+            channel: this.channel,
+            key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
+          }
+
+          socket.send(JSON.stringify(sendObj))
+          this.appBody.querySelector('#message').value = ''
         }
-
-        socket.send(JSON.stringify(sendObj))
-        this.appBody.querySelector('#message').value = ''
       }
     })
 
