@@ -24,11 +24,3 @@ apps.addEventListener('click', event => {
     document.querySelector('#surface').appendChild(memory)
   }
 })
-
-/* apps.addEventListener('click', event => {
-  if (event.target.alt === 'chat') {
-    let window = document.createElement('window-form')
-    window.setAttribute('title', 'Window Test')
-    document.querySelector('#surface').appendChild(window)
-  }
-}) */

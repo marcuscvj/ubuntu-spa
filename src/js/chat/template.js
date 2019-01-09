@@ -1,6 +1,6 @@
-const userInputForm = document.createElement('template')
-userInputForm.innerHTML = `
-<form id="username-form" autocomplete="off">
+const template = document.createElement('template')
+template.innerHTML = `
+<form id="username-form" autocomplete="off" hidden>
   <div class="form-group">
     <label for="inputUsername">Username</label>
     <input type="text" class="form-control" id="inputUsername" name="username" aria-describedby="usernameHelp" placeholder="Enter username">
@@ -8,11 +8,8 @@ userInputForm.innerHTML = `
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-`
 
-const messageForm = document.createElement('template')
-messageForm.innerHTML = `
-<ul class="nav">
+<ul class="nav" hidden>
   <li class="nav-item">
     <a id="change-username" class="nav-link" href="#">Change Username</a>
   </li>
@@ -56,7 +53,7 @@ messageForm.innerHTML = `
   </div>
 </div>
 
-<form id="message-form" autocomplete="off">
+<form id="message-form" autocomplete="off" hidden>
   <div class="form-group">
     <div class="messages"></div>
   </div>
@@ -198,4 +195,4 @@ textarea.form-control:focus {
 </style>
 `
 
-export { userInputForm, messageForm, defaultStyle, settingsStyle }
+export { template, defaultStyle, settingsStyle }
