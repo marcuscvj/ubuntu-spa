@@ -81,19 +81,21 @@ export class Window extends window.HTMLElement {
       }
 
       if (event.target === this.appHeader) {
+        this.app.classList.remove('app-focused')
+        this.active = true
+
         let appTitle = event.target.querySelector('.app-title')
         if (appTitle.textContent !== null) {
           this.appCurrent.textContent = appTitle.textContent
         }
-        this.active = true
       }
     })
 
     this.app.addEventListener('mouseup', event => {
-      this.app.classList.remove('app-focused')
-
       this.initialX = this.currentX
       this.initialY = this.currentY
+
+      this.app.classList.remove('app-focused')
       this.active = false
     })
 
