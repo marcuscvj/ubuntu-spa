@@ -5,6 +5,7 @@ export class Window extends window.HTMLElement {
     super()
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
+    this.appCurrent = document.querySelector('.navbar-current-app')
     this.titleText = 'Window Object'
     this.container = this.shadowRoot.querySelector('#container')
     this.app = this.shadowRoot.querySelector('#app')
@@ -91,6 +92,7 @@ export class Window extends window.HTMLElement {
   attributeChangedCallback (name, oldValue, newValue) {
     if (name === 'title') {
       this.titleText = newValue
+      this.appCurrent.textContent = newValue
     }
   }
 

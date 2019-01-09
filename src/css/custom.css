@@ -148,3 +148,11 @@ body {
 .navbar-light .navbar-nav .nav-link:active {
   color: #DAD8D1;
 }
+
+.navbar-current-app {
+  float: left;
+  margin-left: 0.5em;
+  margin-top: 0.2em;
+  font-family: ubuntubold;
+  color: #DAD8D1 !important;
+}
