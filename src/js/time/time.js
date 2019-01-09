@@ -1,7 +1,7 @@
 /**
  * Time module.
  *
- * @module src/js/time
+ * @module src/js/time/time
  * @author Marcus Cvjeticanin
  * @version 1.0
  */

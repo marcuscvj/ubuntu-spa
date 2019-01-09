@@ -9,7 +9,7 @@ import { Window } from './window/window.js'
 import { Chat } from './chat/chat.js'
 import { Clock } from './clock/clock.js'
 import { Memory } from './memory/memory.js'
-import displayCurrentTime from './time.js'
+import displayCurrentTime from './time/time.js'
 
 let apps = document.querySelector('#apps')
 let time = document.querySelector('#display-current-time')
