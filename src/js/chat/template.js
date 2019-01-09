@@ -28,6 +28,19 @@ messageForm.innerHTML = `
     padding: 0.5rem 1rem 0.5rem 0rem;
     font-family: ubuntubold;
   }
+
+  .btn-outline-secondary {
+    color: #fff;
+    background-color: #8D1440;
+    border-color: #630225;
+  }
+
+  .btn-outline-secondary:active,
+  .btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #540c26;
+    border-color: #630225;
+  }
 </style>
 <ul class="nav">
   <li class="nav-item">
