@@ -16,8 +16,41 @@ messageForm.innerHTML = `
   .form-control {
     overflow-y: scroll;
   }
+  .nav {
+    margin-bottom: 1em;
+  }
+  
+  .nav a {
+    color: inherit;
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem 0.5rem 0rem;
+    font-family: ubuntubold;
+  }
 </style>
-<div id="select-channel" class="form-group">
+<ul class="nav">
+  <li class="nav-item">
+    <a id="change-username" class="nav-link" href="#">Change Username</a>
+  </li>
+  <li class="nav-item">
+    <a id="change-channel" class="nav-link" href="#">Channel</a>
+  </li>
+</ul>
+
+<div id="select-username" class="form-group" hidden>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">@</span>
+    </div>
+  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Change</button>
+  </div>
+  </div>
+</div>
+
+<div id="select-channel" class="form-group" hidden>
   <div class="input-group">
     <div class="input-group-prepend">
     <div class="input-group-text">#</div>
@@ -25,6 +58,7 @@ messageForm.innerHTML = `
     <input type="text" class="form-control" name="channel" placeholder="channel">
   </div>
 </div>
+
 <form id="message-form" autocomplete="off">
   <div class="form-group">
     <textarea class="form-control" rows="8" readonly></textarea>

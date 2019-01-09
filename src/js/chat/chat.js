@@ -9,23 +9,36 @@ export class Chat extends Window {
     this.channel = undefined
     this.url = 'ws://vhost3.lnu.se:20080/socket/'
 
-    // if chat-form does not exists in DOM
-    if (!document.querySelector('chat-form')) {
-      this.appBody.appendChild(userInputForm.content.cloneNode(true))
-    } else if (window.localStorage.getItem('user')) {
+    if (window.localStorage.getItem('user')) {
       this.appBody.appendChild(messageForm.content.cloneNode(true))
     } else {
       this.appBody.appendChild(userInputForm.content.cloneNode(true))
     }
 
     const socket = new WebSocket(this.url)
+    this.navigation = this.appBody.querySelector('.nav')
+    this.selectChannel = this.appBody.querySelector('#select-channel')
+    this.selectUsername = this.appBody.querySelector('#select-username')
 
     socket.addEventListener('message', event => {
       let msg = JSON.parse(event.data)
+      console.log(msg)
 
       if (msg.type === 'message' && msg.channel === this.channel) {
         let str = msg.username + ': ' + msg.data + '&#010;'
         this.appBody.querySelector('textarea').innerHTML += str
+      }
+    })
+
+    this.navigation.addEventListener('click', event => {
+      event.preventDefault()
+
+      if (event.target.id === 'change-channel') {
+        this.selectUsername.hidden = true
+        this.selectChannel.hidden = false
+      } else if (event.target.id === 'change-username') {
+        this.selectChannel.hidden = true
+        this.selectUsername.hidden = false
       }
     })
 

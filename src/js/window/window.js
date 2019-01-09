@@ -42,11 +42,6 @@ export class Window extends window.HTMLElement {
     })
 
     this.app.addEventListener('mousedown', event => {
-      let appTitle = event.target.querySelector('.app-title')
-      if (appTitle.textContent !== null) {
-        this.appCurrent.textContent = appTitle.textContent
-      }
-
       if (event.type === 'touchstart') {
         this.initialX = event.touches[0].clientX - this.offsetX
         this.initialY = event.touches[0].clientY - this.offsetY
@@ -56,6 +51,10 @@ export class Window extends window.HTMLElement {
       }
 
       if (event.target === this.appHeader) {
+        let appTitle = event.target.querySelector('.app-title')
+        if (appTitle.textContent !== null) {
+          this.appCurrent.textContent = appTitle.textContent
+        }
         this.active = true
       }
     })

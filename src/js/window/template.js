@@ -10,6 +10,7 @@ template.innerHTML = `
     width: 500px;
     height: auto;
     background-color: #F2F1F0;
+    border-color: #616155;
     border-radius: .25rem;
     float: left;
     -webkit-box-shadow:  10px 10px 50px 1px rgba(0, 0, 0, 0.7);
@@ -33,8 +34,8 @@ template.innerHTML = `
     padding: 0.2rem 1rem 0rem 1rem;
     background: linear-gradient(#616155 , #483C3C);
     color: #DAD8D1;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
   }
 
   .app-body {
