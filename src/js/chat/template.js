@@ -113,7 +113,7 @@ defaultStyle.innerHTML = `
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     color: #5c5063;
-    font-size: 1rem;
+    font-size: 0.95rem;
     background-color: #fff;
     overflow-y: scroll;
   }
@@ -128,6 +128,10 @@ defaultStyle.innerHTML = `
     font-style: italic;
     margin-left: 0.5rem;
     color: #c3c3c3;
+  }
+
+  .form-control {
+    font-size: 0.95rem;
   }
 
   #settings {
@@ -156,24 +160,35 @@ settingsStyle.innerHTML = `
   color: #DAD8D1;
 }
 
-.messages {
-  background-color: #212121;
-  color: #ccc;
-}
-
 .message {
   border-bottom: 1px solid #404040;
-  color: #ccc;
+  color: #DAD8D1;
 }
 
 #message-time {
   color: #636363;
 }
 
+.messages,
+.input-group-text,
+input.form-control,
+input.form-control:focus {
+  background-color: #212121;
+  color: #DAD8D1;
+  border-color: #4a2f2f;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  color: #fff;
+  border-color: #630225;
+  background-color: #8D1440;
+}
+
 textarea.form-control,
 textarea.form-control:focus {
   background-color: #212121;
-  color: #ccc;
+  color: #DAD8D1;
+  border-color: #4a2f2f;
 }
 
 .btn-light {
