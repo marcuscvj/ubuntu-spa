@@ -41,6 +41,10 @@ messageForm.innerHTML = `
     background-color: #540c26;
     border-color: #630225;
   }
+
+  #new-username {
+    margin-bottom: 1rem;
+  }
 </style>
 <ul class="nav">
   <li class="nav-item">
@@ -51,17 +55,21 @@ messageForm.innerHTML = `
   </li>
 </ul>
 
-<div id="select-username" class="form-group" hidden>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">@</span>
+<form id="new-username" hidden>
+  <div class="form-row align-items-center">
+    <div class="col-sm-10">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">@</div>
+        </div>
+        <input type="text" class="form-control" placeholder="username" name="username">
+      </div>
     </div>
-  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Change</button>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </div>
-  </div>
-</div>
+</form>
 
 <div id="select-channel" class="form-group" hidden>
   <div class="input-group">

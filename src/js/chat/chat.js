@@ -18,7 +18,7 @@ export class Chat extends Window {
     const socket = new WebSocket(this.url)
     this.navigation = this.appBody.querySelector('.nav')
     this.selectChannel = this.appBody.querySelector('#select-channel')
-    this.selectUsername = this.appBody.querySelector('#select-username')
+    this.newUsername = this.appBody.querySelector('#new-username')
 
     socket.addEventListener('message', event => {
       let msg = JSON.parse(event.data)
@@ -34,11 +34,22 @@ export class Chat extends Window {
       event.preventDefault()
 
       if (event.target.id === 'change-channel') {
-        this.selectUsername.hidden = true
+        this.newUsername.hidden = true
         this.selectChannel.hidden = false
       } else if (event.target.id === 'change-username') {
         this.selectChannel.hidden = true
-        this.selectUsername.hidden = false
+        this.newUsername.hidden = false
+      }
+    })
+
+    this.newUsername.addEventListener('submit', event => {
+      event.preventDefault()
+      console.log(event.target)
+
+      if (event.target.id === 'new-username') {
+        let user = event.target.username.value
+        console.log(user)
+        window.localStorage.setItem('user', JSON.stringify({ username: user }))
       }
     })
 
