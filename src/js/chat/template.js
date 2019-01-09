@@ -139,6 +139,23 @@ defaultStyle.innerHTML = `
 const settingsStyle = document.createElement('template')
 settingsStyle.innerHTML = `
 <style>
+
+#app {
+  background-color: #381a1a;
+}
+
+.app-body {
+  background-color: #381a1a;
+}
+
+.nav a {
+  color: #DAD8D1;
+}
+
+.custom-control-label {
+  color: #DAD8D1;
+}
+
 .messages {
   background-color: #212121;
   color: #ccc;
@@ -151,6 +168,17 @@ settingsStyle.innerHTML = `
 
 #message-time {
   color: #636363;
+}
+
+textarea.form-control,
+textarea.form-control:focus {
+  background-color: #212121;
+  color: #ccc;
+}
+
+.btn-light {
+  border-color: #4a2f2f;
+  color: #DAD8D1;
 }
 </style>
 `

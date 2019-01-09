@@ -17,7 +17,7 @@ export class Chat extends Window {
     }
 
     const socket = new WebSocket(this.url)
-    
+
     this.navigation = this.appBody.querySelector('.nav')
     this.selectChannel = this.appBody.querySelector('#select-channel')
     this.newUsername = this.appBody.querySelector('#new-username')
@@ -57,7 +57,7 @@ export class Chat extends Window {
       } else {
         let appDiv = this.shadowRoot.querySelector('#app')
         let styles = appDiv.querySelectorAll('style')
-        
+
         for (let i = 0; i < styles.length; i++) {
           styles[i].remove()
         }
