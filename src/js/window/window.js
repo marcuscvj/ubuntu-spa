@@ -42,6 +42,11 @@ export class Window extends window.HTMLElement {
     })
 
     this.app.addEventListener('mousedown', event => {
+      let appTitle = event.target.querySelector('.app-title')
+      if (appTitle.textContent !== null) {
+        this.appCurrent.textContent = appTitle.textContent
+      }
+
       if (event.type === 'touchstart') {
         this.initialX = event.touches[0].clientX - this.offsetX
         this.initialY = event.touches[0].clientY - this.offsetY
@@ -67,8 +72,6 @@ export class Window extends window.HTMLElement {
       if (this.active) {
         event.preventDefault()
         this.app.classList.add('app-focused')
-        let appTitle = event.target.querySelector('.app-title')
-        this.appCurrent.textContent = appTitle.textContent
 
         if (event.type === 'touchmove') {
           this.initialX = event.touches[0].clientX - this.offsetX

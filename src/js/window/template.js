@@ -10,7 +10,6 @@ template.innerHTML = `
     width: 500px;
     height: auto;
     background-color: #F2F1F0;
-    border: 1px solid #772c2c;
     border-radius: .25rem;
     float: left;
     -webkit-box-shadow:  10px 10px 50px 1px rgba(0, 0, 0, 0.7);
@@ -27,10 +26,11 @@ template.innerHTML = `
 
   .app-focused {
     z-index: 1 !important;
+    opacity: 0.85 !important;
   }
 
   .app-header {
-    padding: 0.2rem 1rem;
+    padding: 0.2rem 1rem 0rem 1rem;
     background: linear-gradient(#616155 , #483C3C);
     color: #DAD8D1;
     border-top-left-radius: 0;
@@ -61,6 +61,7 @@ template.innerHTML = `
     width: 24px;
     height: auto;
     margin-right: 10px;
+    padding-bottom: 5px;
   }
 
   #app:hover {
