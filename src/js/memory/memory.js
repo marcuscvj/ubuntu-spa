@@ -1,7 +1,26 @@
+/**
+ * Memory module.
+ *
+ * @module src/js/memory/memory
+ * @author Marcus Cvjeticanin
+ * @version 1.0
+ */
+
 import { Window } from '../window/window.js'
 import template from './template.js'
 
+/**
+ * A Memory application that inherits from Window.
+ *
+ * @class Memory
+ * @extends {Window}
+ */
 export class Memory extends Window {
+  /**
+   * Creates an instance of Memory.
+   *
+   * @memberof Memory
+   */
   constructor () {
     super()
     this.appIcon.setAttribute('src', '/image/nav/memory.png')
@@ -45,6 +64,11 @@ export class Memory extends Window {
     })
   }
 
+  /**
+   * Turns the brick in the Memory game.
+   *
+   * @memberof Memory
+   */
   turnBrick (tile, index, img) {
     img.src = '../../image/memory/' + tile + '.png'
 
@@ -93,6 +117,11 @@ export class Memory extends Window {
     }
   }
 
+  /**
+   * Creates the bricks and shuffles it.
+   *
+   * @memberof Memory
+   */
   getPictureArray (rows, cols) {
     let arr = []
 

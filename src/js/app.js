@@ -1,3 +1,10 @@
+/**
+ * Starting point of the application
+ *
+ * @author Marcus Cvjeticanin
+ * @version 1.0
+ */
+
 import { Window } from './window/window.js'
 import { Chat } from './chat/chat.js'
 import { Clock } from './clock/clock.js'
