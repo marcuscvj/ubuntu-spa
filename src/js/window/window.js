@@ -1,6 +1,25 @@
+/**
+ * Window module.
+ *
+ * @module src/js/window/window
+ * @author Marcus Cvjeticanin
+ * @version 1.0
+ */
+
 import template from './template.js'
 
+/**
+ * A basic Window element that other app elements inherts from.
+ *
+ * @class Window
+ * @extends {window.HTMLElement}
+ */
 export class Window extends window.HTMLElement {
+  /**
+   * Creates an instance of Window.
+   *
+   * @memberof Window
+   */
   constructor () {
     super()
     this.attachShadow({ mode: 'open' })
@@ -26,10 +45,21 @@ export class Window extends window.HTMLElement {
     this.offsetY = 0
   }
 
+  /**
+   * Static method that gets specific attributes from the element.
+   *
+   * @memberof Window
+   * @static
+   */
   static get observedAttributes () {
     return ['title']
   }
 
+  /**
+   * Called when connected to the DOM
+   *
+   * @memberof Window
+   */
   connectedCallback () {
     this.appTitle.textContent = this.titleText
 
@@ -88,15 +118,17 @@ export class Window extends window.HTMLElement {
     })
   }
 
+  /**
+   * Calls when an attribute changes. Setting new
+   * title value of the element.
+   *
+   * @memberof Window
+   */
   attributeChangedCallback (name, oldValue, newValue) {
     if (name === 'title') {
       this.titleText = newValue
       this.appCurrent.textContent = newValue
     }
-  }
-
-  clearWindow () {
-    this.appBody.innerHTML = ''
   }
 }
 

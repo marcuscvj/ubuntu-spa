@@ -1,7 +1,26 @@
+/**
+ * Chat module.
+ *
+ * @module src/js/chat/chat
+ * @author Marcus Cvjeticanin
+ * @version 1.0
+ */
+
 import { Window } from '../window/window.js'
 import { template, defaultStyle, settingsStyle } from './template.js'
 
+/**
+ * A Chat application that inherits from Window.
+ *
+ * @class Chat
+ * @extends {Window}
+ */
 export class Chat extends Window {
+  /**
+   * Creates an instance of Chat.
+   *
+   * @memberof Chat
+   */
   constructor () {
     super()
     this.appIcon.setAttribute('src', '/image/nav/chat.png')
@@ -131,7 +150,6 @@ export class Chat extends Window {
       }
     })
 
-    // Event listeners to close the socket when the user closes the window
     this.appHeaderCloseBtn.addEventListener('click', event => {
       socket.close()
     })
@@ -141,6 +159,13 @@ export class Chat extends Window {
     })
   }
 
+  /**
+   * Returns the current date in format
+   * YYYY-MM-DD HH:MM:SS
+   *
+   * @memberof Chat
+   * @returns {String}
+   */
   getDate () {
     let d = new Date()
 
