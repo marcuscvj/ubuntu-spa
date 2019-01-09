@@ -1,5 +1,5 @@
 import { Window } from '../window/window.js'
-import { userInputForm, messageForm, settingsStyle } from './template.js'
+import { userInputForm, messageForm, defaultStyle, settingsStyle } from './template.js'
 
 export class Chat extends Window {
   constructor () {
@@ -10,12 +10,14 @@ export class Chat extends Window {
     this.url = 'ws://vhost3.lnu.se:20080/socket/'
 
     if (window.localStorage.getItem('user')) {
+      this.appBody.appendChild(defaultStyle.content.cloneNode(true))
       this.appBody.appendChild(messageForm.content.cloneNode(true))
     } else {
       this.appBody.appendChild(userInputForm.content.cloneNode(true))
     }
 
     const socket = new WebSocket(this.url)
+    
     this.navigation = this.appBody.querySelector('.nav')
     this.selectChannel = this.appBody.querySelector('#select-channel')
     this.newUsername = this.appBody.querySelector('#new-username')
@@ -46,16 +48,21 @@ export class Chat extends Window {
         this.selectChannel.hidden = true
         this.newUsername.hidden = true
         this.chatSettings.hidden = false
-        console.log('testing')
       }
     })
 
     this.chatSettings.addEventListener('change', event => {
       if (event.target.checked) {
         this.app.appendChild(settingsStyle.content.cloneNode(true))
-        console.log('checked!')
       } else {
-        console.log('unchecked')
+        let appDiv = this.shadowRoot.querySelector('#app')
+        let styles = appDiv.querySelectorAll('style')
+        
+        for (let i = 0; i < styles.length; i++) {
+          styles[i].remove()
+        }
+
+        this.appBody.appendChild(defaultStyle.content.cloneNode(true))
       }
     })
 

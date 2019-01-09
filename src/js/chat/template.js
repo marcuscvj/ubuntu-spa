@@ -12,6 +12,63 @@ userInputForm.innerHTML = `
 
 const messageForm = document.createElement('template')
 messageForm.innerHTML = `
+<ul class="nav">
+  <li class="nav-item">
+    <a id="change-username" class="nav-link" href="#">Change Username</a>
+  </li>
+  <li class="nav-item">
+    <a id="change-channel" class="nav-link" href="#">Channel</a>
+  </li>
+  <li class="nav-item">
+    <a id="chat-settings" class="nav-link" href="#">Settings</a>
+  </li>
+</ul>
+
+<div id="settings" hidden>
+  <div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" id="dark-theme">
+    <label class="custom-control-label" for="dark-theme">Use dark theme</label>
+  </div>
+</div>
+
+<form id="new-username" autocomplete="off" hidden>
+  <div class="form-row align-items-center">
+    <div class="col-sm-10">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">@</div>
+        </div>
+        <input type="text" class="form-control" placeholder="username" name="username">
+      </div>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
+
+<div id="select-channel" class="form-group" hidden>
+  <div class="input-group">
+    <div class="input-group-prepend">
+    <div class="input-group-text">#</div>
+    </div>
+    <input type="text" class="form-control" name="channel" placeholder="channel">
+  </div>
+</div>
+
+<form id="message-form" autocomplete="off">
+  <div class="form-group">
+    <div class="messages"></div>
+  </div>
+  <div class="form-group">
+    <textarea id="message" class="form-control" name="message" rows="2" placeholder="Send a message"></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Send</button>
+</form>
+`
+
+const defaultStyle = document.createElement('template')
+defaultStyle.innerHTML = `
 <style>
   .form-control {
     overflow-y: scroll;
@@ -77,59 +134,6 @@ messageForm.innerHTML = `
     margin-bottom: 1rem;
   }
 </style>
-<ul class="nav">
-  <li class="nav-item">
-    <a id="change-username" class="nav-link" href="#">Change Username</a>
-  </li>
-  <li class="nav-item">
-    <a id="change-channel" class="nav-link" href="#">Channel</a>
-  </li>
-  <li class="nav-item">
-    <a id="chat-settings" class="nav-link" href="#">Settings</a>
-  </li>
-</ul>
-
-<div id="settings" hidden>
-  <div class="custom-control custom-switch">
-    <input type="checkbox" class="custom-control-input" id="dark-theme">
-    <label class="custom-control-label" for="dark-theme">Use dark theme</label>
-  </div>
-</div>
-
-<form id="new-username" autocomplete="off" hidden>
-  <div class="form-row align-items-center">
-    <div class="col-sm-10">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">@</div>
-        </div>
-        <input type="text" class="form-control" placeholder="username" name="username">
-      </div>
-    </div>
-    <div class="col-auto">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  </div>
-</form>
-
-<div id="select-channel" class="form-group" hidden>
-  <div class="input-group">
-    <div class="input-group-prepend">
-    <div class="input-group-text">#</div>
-    </div>
-    <input type="text" class="form-control" name="channel" placeholder="channel">
-  </div>
-</div>
-
-<form id="message-form" autocomplete="off">
-  <div class="form-group">
-    <div class="messages"></div>
-  </div>
-  <div class="form-group">
-    <textarea id="message" class="form-control" name="message" rows="2" placeholder="Send a message"></textarea>
-  </div>
-  <button class="btn btn-primary" type="submit">Send</button>
-</form>
 `
 
 const settingsStyle = document.createElement('template')
@@ -151,4 +155,4 @@ settingsStyle.innerHTML = `
 </style>
 `
 
-export { userInputForm, messageForm, settingsStyle }
+export { userInputForm, messageForm, defaultStyle, settingsStyle }
