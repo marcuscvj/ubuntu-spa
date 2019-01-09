@@ -17,11 +17,6 @@ export class Window extends window.HTMLElement {
     this.appFooterCloseBtn = this.shadowRoot.querySelector('.app-close-btn')
     this.appIcon = this.shadowRoot.querySelector('.app-icon')
 
-    // let lastCustomElement = document.querySelector('#surface').lastElementChild
-    // lastCustomElement.app.style.transform = 'translate3d(10px, 10px, 0)'
-
-    // console.log(appDiv)
-
     this.active = false
     this.currentX = undefined
     this.currentY = undefined
@@ -72,6 +67,8 @@ export class Window extends window.HTMLElement {
       if (this.active) {
         event.preventDefault()
         this.app.classList.add('app-focused')
+        let appTitle = event.target.querySelector('.app-title')
+        this.appCurrent.textContent = appTitle.textContent
 
         if (event.type === 'touchmove') {
           this.initialX = event.touches[0].clientX - this.offsetX
