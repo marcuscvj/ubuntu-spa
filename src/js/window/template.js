@@ -6,7 +6,7 @@ template.innerHTML = `
   #app {
     transform: translate3d(10px, 10px, 0);
     position: absolute;
-    z-index: 1;
+    z-index: auto;
     width: 500px;
     height: auto;
     background-color: #F2F1F0;
@@ -23,7 +23,10 @@ template.innerHTML = `
   .app-active {
     color: #DAD8D1 !important;
     background: rgba(255, 255, 255, 0.7) !important;
-    z-index: 1;
+  }
+
+  .app-focused {
+    z-index: 1 !important;
   }
 
   .app-header {

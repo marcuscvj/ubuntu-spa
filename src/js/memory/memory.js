@@ -35,8 +35,6 @@ export class Memory extends Window {
       aTag.addEventListener('click', event => {
         event.preventDefault()
         let img = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
-        console.log(event.target.nodeName)
-        console.log(event.target)
         this.turnBrick(tile, index, img)
       })
 

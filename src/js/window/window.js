@@ -16,6 +16,11 @@ export class Window extends window.HTMLElement {
     this.appFooterCloseBtn = this.shadowRoot.querySelector('.app-close-btn')
     this.appIcon = this.shadowRoot.querySelector('.app-icon')
 
+    // let lastCustomElement = document.querySelector('#surface').lastElementChild
+    // lastCustomElement.app.style.transform = 'translate3d(10px, 10px, 0)'
+
+    // console.log(appDiv)
+
     this.active = false
     this.currentX = undefined
     this.currentY = undefined
@@ -55,7 +60,7 @@ export class Window extends window.HTMLElement {
     })
 
     this.app.addEventListener('mouseup', event => {
-      this.appHeader.classList.remove('app-active')
+      this.app.classList.remove('app-focused')
 
       this.initialX = this.currentX
       this.initialY = this.currentY
@@ -65,7 +70,7 @@ export class Window extends window.HTMLElement {
     this.app.addEventListener('mousemove', event => {
       if (this.active) {
         event.preventDefault()
-        this.appHeader.classList.add('app-active')
+        this.app.classList.add('app-focused')
 
         if (event.type === 'touchmove') {
           this.initialX = event.touches[0].clientX - this.offsetX
