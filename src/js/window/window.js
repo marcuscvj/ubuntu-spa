@@ -72,13 +72,8 @@ export class Window extends window.HTMLElement {
     })
 
     this.app.addEventListener('mousedown', event => {
-      if (event.type === 'touchstart') {
-        this.initialX = event.touches[0].clientX - this.offsetX
-        this.initialY = event.touches[0].clientY - this.offsetY
-      } else {
-        this.initialX = event.clientX - this.offsetX
-        this.initialY = event.clientY - this.offsetY
-      }
+      this.initialX = event.clientX - this.offsetX
+      this.initialY = event.clientY - this.offsetY
 
       if (event.target === this.appHeader) {
         this.app.classList.remove('app-focused')
@@ -102,19 +97,15 @@ export class Window extends window.HTMLElement {
     this.app.addEventListener('mousemove', event => {
       if (this.active) {
         event.preventDefault()
+
+        this.currentX = event.clientX - this.initialX
+        this.currentY = event.clientY - this.initialY
+
         this.app.classList.add('app-focused')
 
-        if (event.type === 'touchmove') {
-          this.initialX = event.touches[0].clientX - this.offsetX
-          this.initialY = event.touches[0].clientY - this.offsetY
-        } else {
-          this.currentX = event.clientX - this.initialX
-          this.currentY = event.clientY - this.initialY
-        }
-
         if (this.currentX > 0 && this.currentY > 0) {
-          let style2 = 'transform: translate3d(' + this.currentX + 'px, ' + this.currentY + 'px, 0)'
-          this.app.setAttribute('style', style2)
+          let style = 'top:' + this.currentY + 'px;' + 'left:' + this.currentX + 'px'
+          this.app.setAttribute('style', style)
         }
       }
     })
