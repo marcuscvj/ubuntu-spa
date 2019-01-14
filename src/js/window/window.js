@@ -103,9 +103,18 @@ export class Window extends window.HTMLElement {
 
         this.app.classList.add('app-focused')
 
-        if (this.currentX > 0 && this.currentY > 0) {
-          let style = 'top:' + this.currentY + 'px;' + 'left:' + this.currentX + 'px'
-          this.app.setAttribute('style', style)
+        let worker = new Worker('./js/window/worker.js')
+
+        let coordinates = {
+          currentX: this.currentX,
+          currentY: this.currentY
+        }
+
+        worker.postMessage({ data: coordinates })
+
+        worker.onmessage = event => {
+          let data = JSON.parse(event.data)
+          this.app.setAttribute('style', data.style)
         }
       }
     })
