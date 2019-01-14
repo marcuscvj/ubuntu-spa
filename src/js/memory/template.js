@@ -5,6 +5,10 @@ template.innerHTML = `
     margin-bottom: 1em;
   }
 
+  #bricks {
+    margin-bottom: 1rem;
+  }
+
   #bricks a:hover {
     text-decoration: initial;
   }
@@ -23,6 +27,10 @@ template.innerHTML = `
 
   #results {
     margin-top: 1em;
+  }
+
+  .list-group {
+    margin-bottom: 1rem;
   }
 
 </style>

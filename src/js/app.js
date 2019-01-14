@@ -9,6 +9,7 @@ import { Window } from './window/window.js'
 import { Chat } from './chat/chat.js'
 import { Clock } from './clock/clock.js'
 import { Memory } from './memory/memory.js'
+import { Settings } from './settings/settings.js'
 import displayCurrentTime from './time/time.js'
 
 let apps = document.querySelector('#apps')
@@ -29,5 +30,9 @@ apps.addEventListener('click', event => {
     let memory = document.createElement('memory-form')
     memory.setAttribute('title', 'Memory Game')
     document.querySelector('#surface').appendChild(memory)
+  } else if (event.target.alt === 'settings') {
+    let settings = document.createElement('settings-form')
+    settings.setAttribute('title', 'Settings')
+    document.querySelector('#surface').appendChild(settings)
   }
 })
