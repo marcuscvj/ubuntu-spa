@@ -3,7 +3,7 @@
  *
  * @module src/js/settings/settings
  * @author Marcus Cvjeticanin
- * @version 1.0
+ * @version 1.1
  */
 
 import { Window } from '../window/window.js'

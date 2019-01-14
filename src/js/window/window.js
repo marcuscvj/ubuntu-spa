@@ -3,7 +3,7 @@
  *
  * @module src/js/window/window
  * @author Marcus Cvjeticanin
- * @version 1.0
+ * @version 1.1
  */
 
 import template from './template.js'
