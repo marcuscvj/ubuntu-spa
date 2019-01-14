@@ -117,6 +117,7 @@ export class Chat extends Window {
             data: msg,
             username: user.username,
             channel: this.channel,
+            // Key should be in an external file not in git repo!
             key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
           }
 

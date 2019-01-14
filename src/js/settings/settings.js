@@ -26,6 +26,20 @@ export class Settings extends Window {
     this.appIcon.setAttribute('src', '/image/nav/settings.png')
     this.appIcon.setAttribute('alt', 'Settings')
     this.appBody.appendChild(template.content.cloneNode(true))
+    this.settings = this.appBody.querySelector('#settings')
+    this.aTagBackground = this.appBody.querySelector('#settings-background')
+    this.submitBtn = this.settings.querySelector('.btn')
+
+    this.aTagBackground.addEventListener('click', event => {
+      this.settings.firstElementChild.innerHTML = ''
+      this.settings.querySelector('#controllers').hidden = false
+      this.settings.querySelector('.background').hidden = false
+    })
+
+    this.submitBtn.addEventListener('click', event => {
+      event.preventDefault()
+      let input = this.settings.querySelector('input[type="file"]')
+    })
   }
 }
 
