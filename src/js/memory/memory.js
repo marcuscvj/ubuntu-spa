@@ -3,10 +3,10 @@
  *
  * @module src/js/memory/memory
  * @author Marcus Cvjeticanin
- * @version 1.1
+ * @version 1.2
  */
 
-import { Window } from '../window/window.js'
+import Window from '../window/window.js'
 import template from './template.js'
 
 /**
@@ -15,7 +15,7 @@ import template from './template.js'
  * @class Memory
  * @extends {Window}
  */
-export class Memory extends Window {
+export default class Memory extends Window {
   /**
    * Creates an instance of Memory.
    *

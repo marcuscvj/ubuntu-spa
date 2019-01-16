@@ -3,10 +3,10 @@
  *
  * @module src/js/chat/chat
  * @author Marcus Cvjeticanin
- * @version 1.1
+ * @version 1.2
  */
 
-import { Window } from '../window/window.js'
+import Window from '../window/window.js'
 import { template, defaultStyle, settingsStyle } from './template.js'
 
 /**
@@ -15,7 +15,7 @@ import { template, defaultStyle, settingsStyle } from './template.js'
  * @class Chat
  * @extends {Window}
  */
-export class Chat extends Window {
+export default class Chat extends Window {
   /**
    * Creates an instance of Chat.
    *
@@ -66,7 +66,7 @@ export class Chat extends Window {
       this.appBody.querySelector('.nav').hidden = false
     }
 
-    const socket = new WebSocket(this.url)
+    const socket = new window.WebSocket(this.url)
 
     /**
      *  Listen if a new message has been recieved

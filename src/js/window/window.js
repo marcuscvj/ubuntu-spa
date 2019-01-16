@@ -14,7 +14,7 @@ import template from './template.js'
  * @class Window
  * @extends {window.HTMLElement}
  */
-export class Window extends window.HTMLElement {
+export default class Window extends window.HTMLElement {
   /**
    * Creates an instance of Window.
    *
@@ -76,7 +76,7 @@ export class Window extends window.HTMLElement {
       this.initialY = event.clientY - this.offsetY
 
       if (event.target === this.appHeader) {
-        this.app.classList.remove('app-focused')
+        this.app.classList.add('app-focused')
         this.active = true
 
         let appTitle = event.target.querySelector('.app-title')

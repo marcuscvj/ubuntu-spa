@@ -6,7 +6,7 @@ template.innerHTML = `
   #app {
     transform: translate3d(10px, 10px, 0);
     position: absolute;
-    z-index: auto;
+    z-index: 0;
     width: 500px;
     height: auto;
     background-color: #F2F1F0;

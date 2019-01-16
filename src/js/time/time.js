@@ -3,7 +3,7 @@
  *
  * @module src/js/time/time
  * @author Marcus Cvjeticanin
- * @version 1.1
+ * @version 1.2
  */
 
 /**

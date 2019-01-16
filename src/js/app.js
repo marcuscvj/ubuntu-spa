@@ -2,14 +2,14 @@
  * Starting point of the application
  *
  * @author Marcus Cvjeticanin
- * @version 1.1
+ * @version 1.2
  */
 
-import { Window } from './window/window.js'
-import { Chat } from './chat/chat.js'
-import { Clock } from './clock/clock.js'
-import { Memory } from './memory/memory.js'
-import { Settings } from './settings/settings.js'
+import './window/window.js'
+import './chat/chat.js'
+import './clock/clock.js'
+import './memory/memory.js'
+import './settings/settings.js'
 import displayCurrentTime from './time/time.js'
 
 let apps = document.querySelector('#apps')
