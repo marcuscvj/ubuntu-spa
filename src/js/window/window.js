@@ -26,6 +26,7 @@ export default class Window extends window.HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true))
     this.appCurrent = document.querySelector('.navbar-current-app')
     this.titleText = 'Window Object'
+    this.surface = document.querySelector("#surface");
     this.container = this.shadowRoot.querySelector('#container')
     this.app = this.shadowRoot.querySelector('#app')
     this.appContent = this.shadowRoot.querySelector('.app-container')
@@ -76,6 +77,14 @@ export default class Window extends window.HTMLElement {
       this.initialY = event.clientY - this.offsetY
 
       if (event.target === this.appHeader) {
+        let lastChild = this.surface.lastElementChild
+
+        if (!this.app.isSameNode(lastChild)) {
+          if (this.surface.childElementCount > 1) {
+            this.surface.insertBefore(this, lastChild.nextSibling)
+          }
+        }
+
         this.app.classList.add('app-focused')
         this.active = true
 
