@@ -3,7 +3,7 @@
  *
  * @module src/js/clock/clock
  * @author Marcus Cvjeticanin
- * @version 1.2
+ * @version 1.3
  */
 
 import Window from '../window/window.js'

@@ -3,7 +3,7 @@
  *
  * @module src/js/memory/memory
  * @author Marcus Cvjeticanin
- * @version 1.2
+ * @version 1.3
  */
 
 import Window from '../window/window.js'

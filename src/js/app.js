@@ -2,7 +2,7 @@
  * Starting point of the application
  *
  * @author Marcus Cvjeticanin
- * @version 1.2
+ * @version 1.3
  */
 
 import './window/window.js'
