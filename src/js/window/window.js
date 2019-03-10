@@ -26,7 +26,7 @@ export default class Window extends window.HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true))
     this.appCurrent = document.querySelector('.navbar-current-app')
     this.titleText = 'Window Object'
-    this.surface = document.querySelector("#surface");
+    this.surface = document.querySelector("#surface")
     this.container = this.shadowRoot.querySelector('#container')
     this.app = this.shadowRoot.querySelector('#app')
     this.appContent = this.shadowRoot.querySelector('.app-container')
